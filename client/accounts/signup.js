@@ -1,5 +1,5 @@
 Template.signup.onCreated(function() {
-  this.numUsers = new ReactiveVar(10);
+  this.numUsers = new ReactiveVar(Meteor.settings.public.defaultNumOfUsers);
 });
 
 Template.signup.helpers({
@@ -14,5 +14,9 @@ Template.signup.helpers({
 Template.signup.events({
   'change #pricing': function(event, instance) {
     instance.numUsers.set(event.currentTarget.value)
+  },
+  'submit .signup-form': function(event) {
+    event.preventDefault();
+    console.log(event);
   }
 });
