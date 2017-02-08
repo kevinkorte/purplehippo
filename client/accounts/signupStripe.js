@@ -16,6 +16,10 @@ Template.signup.rendered = function() {
       password: {
         required: true,
         minlength: 6
+      },
+      passwordVerify: {
+        minlength: 6,
+        equalTo: "#password"
       }
     },
     messages: {
@@ -29,10 +33,14 @@ Template.signup.rendered = function() {
       password: {
         required: "Please enter a password to sign up.",
         minlength: "Please use at least six characters."
+      },
+      passwordVerify: {
+        minlength: "Please use at least six characters.",
+        equalTo: "Your passwords do not match."
       }
     },
     submitHandler: function() {
-      
+
     }
   })
 }
