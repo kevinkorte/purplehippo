@@ -40,7 +40,34 @@ Template.signup.rendered = function() {
       }
     },
     submitHandler: function() {
-
+      let customer = {
+        name: $('[name="name"]').val(),
+        email: $('[name="email"]').val(),
+        password: $('[name="password"]').val(),
+        numUsers: $('[name="numUsers"]').val()
+      }
+      //change submit button to loading here
+      Meteor.call('createTrialCustomer', customer, function(error, response) {
+        if (error) {
+          alert(error.reason);
+          //reset submit button
+        } else {
+          if (response.error) {
+            alert(response.message);
+            //reset submit button
+          } else {
+            Meteor.loginWithPassword(customer.emailAddress, customer.password), function(error) {
+              if (error) {
+                alert(error.reason);
+                //reset submit button
+              } else {
+                //Go somewhere with FlowRouter.go
+                //reset submit button
+              }
+            }
+          }
+        }
+      })
     }
   })
 }
