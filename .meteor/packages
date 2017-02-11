@@ -23,8 +23,10 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 accounts-password
 email
 check
+random
 themeteorchef:jquery-validation
 mrgalaxy:stripe
 kadira:flow-router
+kadira:blaze-layout
 
 meteortoys:allthings

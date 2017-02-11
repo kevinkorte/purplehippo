@@ -62,7 +62,7 @@ Template.signup.rendered = function() {
                 alert(error.reason);
                 //reset submit button
               } else {
-                FlowRouter.go('/welcome');
+                FlowRouter.go('/account/invite');
                 //Go somewhere with FlowRouter.go
                 //reset submit button
               }

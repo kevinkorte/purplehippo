@@ -42,6 +42,7 @@ Meteor.methods({
                 console.log('stripeCustomer', stripeCustomer);
                 console.log('response', response);
                 let subscription = {
+                  organizationId: Random.id(),
                   customerId: stripeCustomer.id,
                   subscription: {
                     plan: {
