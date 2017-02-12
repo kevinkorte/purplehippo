@@ -39,8 +39,13 @@ Meteor.methods({
                     name: customer.name,
                   }
                 });
-                console.log('stripeCustomer', stripeCustomer);
-                console.log('response', response);
+                Meteor.call('createOrganization', user, response.quantity, function(error, response) {
+                  if(error) {
+                    console.log(error);
+                  } else {
+                    console.log(response);
+                  }
+                })
                 let subscription = {
                   organizationId: Random.id(),
                   customerId: stripeCustomer.id,
@@ -117,5 +122,8 @@ Meteor.methods({
       }
     });
     return stripeSubscription.wait();
+  },
+  createOrganization: function(user, quantity) {
+    console.log(user, quantity);
   }
 })
