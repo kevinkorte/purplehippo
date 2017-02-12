@@ -48,7 +48,7 @@ Meteor.methods({
                     plan: {
                       id: response.plan.id,
                       name: response.plan.name,
-                      used: 0,
+                      used: 1,
                       amount: response.plan.amount,
                     },
                     id: response.id,
