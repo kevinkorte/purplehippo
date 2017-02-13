@@ -39,41 +39,21 @@ Meteor.methods({
                     name: customer.name,
                   }
                 });
-                Meteor.call('createOrganization', user, response.quantity, function(error, response) {
-                  if(error) {
-                    console.log(error);
-                  } else {
-                    console.log(response);
-                  }
-                })
-                let subscription = {
-                  organizationId: Random.id(),
-                  customerId: stripeCustomer.id,
-                  subscription: {
-                    plan: {
-                      id: response.plan.id,
-                      name: response.plan.name,
-                      used: 1,
-                      amount: response.plan.amount,
-                    },
-                    id: response.id,
-                    created: response.created,
-                    current_period_end: response.current_period_end,
-                    current_period_start: response.current_period_start,
-                    quantity: response.quantity,
-                    start: response.start,
-                    status: response.status,
-                    trial_end: response.trial_end,
-                    trial_start: response.trial_start
-                  }
-                }
-                Meteor.users.update(user, {
-                  $set: subscription
-                }, function(error, response) {
+                Meteor.call('createOrganization', user, response, stripeCustomer, function(error, result){
                   if (error) {
-                    console.log(error);
+                    console.log(error.reason);
                   } else {
-                    newCustomer.return(user);
+                    let organization = {organizationId: result}
+                    console.log('organization id', organization);
+                    Meteor.users.update(user, {
+                      $set: organization
+                    }, function(error, response) {
+                      if (error) {
+                        console.log(error);
+                      } else {
+                        newCustomer.return(user);
+                      }
+                    });
                   }
                 });
               } catch(exception) {
@@ -123,7 +103,38 @@ Meteor.methods({
     });
     return stripeSubscription.wait();
   },
-  createOrganization: function(user, quantity) {
-    console.log(user, quantity);
+  createOrganization: function(user, response, stripeCustomer) {
+    console.log('user', user);
+    console.log('create organization', response);
+    console.log('create stripeCustomer id', stripeCustomer);
+    Organizations.insert({
+      owner: user,
+      quantityUsed: 1,
+      quantity: response.quantity,
+      customerId: stripeCustomer.id,
+      subscription: {
+        plan: {
+          id: response.plan.id,
+          name: response.plan.name,
+          used: 1,
+          amount: response.plan.amount,
+        },
+        id: response.id,
+        created: response.created,
+        current_period_end: response.current_period_end,
+        current_period_start: response.current_period_start,
+        quantity: response.quantity,
+        start: response.start,
+        status: response.status,
+        trial_end: response.trial_end,
+        trial_start: response.trial_start
+      }
+    }, function(error, result){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+      }
+    })
   }
 })
