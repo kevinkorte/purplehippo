@@ -112,23 +112,24 @@ Meteor.methods({
       quantityUsed: 1,
       quantity: response.quantity,
       customerId: stripeCustomer.id,
-      subscription: {
-        plan: {
-          id: response.plan.id,
-          name: response.plan.name,
-          used: 1,
-          amount: response.plan.amount,
-        },
-        id: response.id,
-        created: response.created,
-        current_period_end: response.current_period_end,
-        current_period_start: response.current_period_start,
-        quantity: response.quantity,
-        start: response.start,
-        status: response.status,
-        trial_end: response.trial_end,
-        trial_start: response.trial_start
-      }
+      plan: {
+        planid: response.plan.id
+        // planname: response.plan.name,
+        // planused: 1,
+        // planamount: response.plan.amount,
+      },
+      // subscription: {
+      //
+      //   // id: response.id,
+      //   // created: response.created,
+      //   // current_period_end: response.current_period_end,
+      //   // current_period_start: response.current_period_start,
+      //   // quantity: response.quantity,
+      //   // start: response.start,
+      //   // status: response.status,
+      //   // trial_end: response.trial_end,
+      //   // trial_start: response.trial_start
+      // }
     }, function(error, result){
       if (error) {
         console.log(error);

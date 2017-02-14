@@ -3,19 +3,18 @@ Organizations = new Mongo.Collection('organizations');
 let Schemas = {};
 
 PlanSchema = new SimpleSchema({
-
-  "plan.$.id": {
+  planid: {
     type: String
-  },
-  "plan.$.name": {
-    type: String
-  },
-  "plan.$.used": {
-    type: Number
-  },
-  "plan.$.amount": {
-    type: Number
   }
+  // planname: {
+  //   type: String
+  // },
+  // planused: {
+  //   type: Number
+  // },
+  // planamount: {
+  //   type: Number
+  // }
 });
 
 Schemas.Organizations = new SimpleSchema({
@@ -31,13 +30,7 @@ Schemas.Organizations = new SimpleSchema({
   customerId: {
     type: String
   },
-  subscription: {
-    type: Array
-  },
-  "subscription.$": {
-    type: Object
-  },
-  "subscription.plan": {
+  plan: {
     type: [PlanSchema]
   },
   createdAt: {
