@@ -2,19 +2,24 @@ Template.invite.helpers({
   canAddMoreUsers: function() {
     let user = Meteor.users.findOne(Meteor.userId());
     if (user) {
-      return user.subscription.plan.used < user.subscription.quantity;
+      let organization = Organizations.findOne(user.organizationId);
+      if (organization) {
+        return organization.quantityUsed < organization.quantity;
+      }
     }
   },
   numUsers: function() {
     let user = Meteor.users.findOne(Meteor.userId());
-    if (user) {
-      return user.subscription.plan.used;
+    let organization = Organizations.findOne(user.organizationId);
+    if (organization) {
+      return organization.quantityUsed;
     }
   },
   maxUsers: function() {
     let user = Meteor.users.findOne(Meteor.userId());
-    if (user) {
-      return user.subscription.quantity;
+    let organization = Organizations.findOne(user.organizationId);
+    if (organization) {
+      return organization.quantity;
     }
   }
 });

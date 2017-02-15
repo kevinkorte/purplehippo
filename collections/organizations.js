@@ -30,21 +30,45 @@ Schemas.Organizations = new SimpleSchema({
   customerId: {
     type: String
   },
-  plan: {
-    type: [PlanSchema]
+  subscription: {
+    type: Object
   },
-  createdAt: {
-    type: Date,
-    autoValue: function() {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return {$setOnInsert: new Date()};
-      } else {
-        this.unset();  // Prevent user from supplying their own value
-      }
-    }
+  'subscription.plan': {
+    type: Object
   },
+  'subscription.plan.planid': {
+    type: String
+  },
+  'subscription.plan.planname': {
+    type: String
+  },
+  'subscription.plan.planamount': {
+    type: Number
+  },
+  'subscription.id': {
+    type: String
+  },
+  'subscription.created': {
+    type: Number
+  },
+  'subscription.current_period_end': {
+    type: Number
+  },
+  'subscription.current_period_start': {
+    type: Number
+  },
+  'subscription.start': {
+    type: Number
+  },
+  'subscription.status': {
+    type: String
+  },
+  'subscription.trial_end': {
+    type: Number
+  },
+  'subscription.trial_start': {
+    type: Number
+  }
 });
 
 Organizations.attachSchema(Schemas.Organizations);

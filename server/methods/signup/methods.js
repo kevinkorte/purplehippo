@@ -104,6 +104,7 @@ Meteor.methods({
     return stripeSubscription.wait();
   },
   createOrganization: function(user, response, stripeCustomer) {
+    let createOrganization = new Future();
     console.log('user', user);
     console.log('create organization', response);
     console.log('create stripeCustomer id', stripeCustomer);
@@ -112,30 +113,30 @@ Meteor.methods({
       quantityUsed: 1,
       quantity: response.quantity,
       customerId: stripeCustomer.id,
-      plan: {
-        planid: response.plan.id
-        // planname: response.plan.name,
-        // planused: 1,
-        // planamount: response.plan.amount,
-      },
-      // subscription: {
-      //
-      //   // id: response.id,
-      //   // created: response.created,
-      //   // current_period_end: response.current_period_end,
-      //   // current_period_start: response.current_period_start,
-      //   // quantity: response.quantity,
-      //   // start: response.start,
-      //   // status: response.status,
-      //   // trial_end: response.trial_end,
-      //   // trial_start: response.trial_start
-      // }
+      subscription: {
+        plan: {
+          planid: response.plan.id,
+          planname: response.plan.name,
+          planamount: response.plan.amount,
+        },
+        id: response.id,
+        created: response.created,
+        current_period_end: response.current_period_end,
+        current_period_start: response.current_period_start,
+        start: response.start,
+        status: response.status,
+        trial_end: response.trial_end,
+        trial_start: response.trial_start
+      }
     }, function(error, result){
       if (error) {
         console.log(error);
+        return createOrganization.return(error);
       } else {
+        return createOrganization.return(result);
         console.log(result);
       }
-    })
+    });
+    return createOrganization.wait();
   }
 })
