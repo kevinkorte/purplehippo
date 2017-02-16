@@ -5,5 +5,9 @@
     <input type="text" name="email">
     <button type="submit">Send Invite</button>
   </form>
+{{else}}
+  <form class="newSeats">
+    <button class="add-more-users" data-text="Create Additional Seats">Add More Users</button>
+  </form>
 {{/if}}
 </template>
