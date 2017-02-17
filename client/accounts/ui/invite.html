@@ -10,4 +10,13 @@
     <button class="add-more-users" data-text="Create Additional Seats">Add More Users</button>
   </form>
 {{/if}}
+
+<ul>
+  {{#each users}}
+    <li>
+      {{profile.name}} - {{emails.[0].address}}
+    </li>
+  {{/each}}
+</ul>
+
 </template>

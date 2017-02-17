@@ -105,9 +105,6 @@ Meteor.methods({
   },
   createOrganization: function(user, response, stripeCustomer) {
     let createOrganization = new Future();
-    console.log('user', user);
-    console.log('create organization', response);
-    console.log('create stripeCustomer id', stripeCustomer);
     Organizations.insert({
       owner: user,
       quantityUsed: 1,

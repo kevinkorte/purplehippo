@@ -25,6 +25,15 @@ Template.invite.helpers({
         return organization.quantity;
       }
     }
+  },
+  users: function() {
+    let user = Meteor.users.findOne(Meteor.userId());
+    if (user) {
+      let organizationId = user.organizationId;
+      console.log(organizationId);
+      return Meteor.users.find({organizationId: organizationId});
+      console.log(Meteor.users.find({organizationId: organizationId}));
+    }
   }
 });
 
