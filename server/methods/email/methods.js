@@ -32,23 +32,26 @@ Meteor.methods({
   },
   addAdditionalSeats: function(additionalSeats) {
     check(additionalSeats, String);
+    let numOfNewSeats = parseInt(additionalSeats);
     let seats = new Future();
     let user = Meteor.users.findOne(Meteor.userId());
     if (user) {
       let organization = Organizations.findOne(user.organizationId);
       if (organization) {
-        console.log('calling stripe');
         Stripe.customers.updateSubscription(
-          organization.id,
-          { quantity: additionalSeats },
-          function(error, response) {
+          organization.customerId,
+          { plan: organization.subscription.plan.planid,
+            quantity: organization.quantity + numOfNewSeats
+          },
+          Meteor.bindEnvironment(function(error, response) {
             if (error) {
               seats.return(error);
             } else {
+              Organizations.update(organization._id, {$inc: {quantity: numOfNewSeats}});
               seats.return(response);
             }
           }
-        );
+        ));
         return seats.wait();
       }
     }
