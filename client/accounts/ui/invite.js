@@ -42,9 +42,10 @@ Template.invite.helpers({
   isMe: function(userId) {
     let user = Meteor.users.findOne(userId);
     if (user) {
-      if (user._id == Meteor.userId()) {
-        return true;
-      }
+      // if (user._id == Meteor.userId()) {
+      //   return true;
+      // }
+      return Roles.userIsInRole(userId, 'owner', user.organizationId);
     }
   }
 });
@@ -54,11 +55,11 @@ Template.invite.events({
     event.preventDefault();
     const target = event.target;
     const email = target.email.value;
-    Meteor.call('inviteUser', email, function(error, response) {
+    Meteor.call('inviteUser', email, function(error, result) {
       if (error) {
         console.log(error.reason);
       } else {
-        console.log(response);
+        Bert.alert('Invitation Sent Successfully', 'success', 'fixed-top', 'fa-check');
       }
     })
   },
@@ -86,6 +87,12 @@ Template.invite.events({
   'click .revokeInvite'(event) {
     console.log(event);
     let id = $('.revokeInvite').data('id');
-    Meteor.call('revokeInvite', id);
+    Meteor.call('revokeInvite', id, function(error, result) {
+      if (error) {
+        console.log(error.reason);
+      } else {
+        Bert.alert('Invitation Successfully Revoked', 'info', 'growl-bottom-left', 'fa-remove')
+      }
+    });
   }
 })

@@ -15,8 +15,13 @@ Meteor.methods({
             console.log(error.reason);
           } else {
             let newUser = Accounts.createUser({email: email});
+            Roles.addUsersToRoles(newUser, ['user'], organization._id);
             Meteor.users.update(newUser, {
-              $set: {organizationId: organization._id, accountActive: true}
+              $set: {
+                organizationId: organization._id,
+                accountActive: true,
+                loginCount: 0
+              }
             }, function(error, response) {
               if (error) {
                 console.log(error);
