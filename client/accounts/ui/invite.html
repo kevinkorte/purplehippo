@@ -15,6 +15,19 @@
   {{#each users}}
     <li>
       {{profile.name}} - {{emails.[0].address}}
+      {{#if accountManagementLink _id}}
+        {{#if isMe _id}}
+          Owner
+        {{else}}
+          <button>Remove Account</button>
+        {{/if}}
+      {{else}}
+        {{#if isMe _id}}
+          Owner
+        {{else}}
+          <button class="revokeInvite" data-id="{{_id}}">Revoke Invite</button>
+        {{/if}}
+      {{/if}}
     </li>
   {{/each}}
 </ul>

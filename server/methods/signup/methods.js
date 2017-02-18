@@ -130,6 +130,7 @@ Meteor.methods({
         console.log(error);
         return createOrganization.return(error);
       } else {
+        Roles.addUsersToRoles(user, ['owner', 'admin'], result);
         return createOrganization.return(result);
         console.log(result);
       }

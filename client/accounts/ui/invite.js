@@ -30,9 +30,21 @@ Template.invite.helpers({
     let user = Meteor.users.findOne(Meteor.userId());
     if (user) {
       let organizationId = user.organizationId;
-      console.log(organizationId);
       return Meteor.users.find({organizationId: organizationId});
-      console.log(Meteor.users.find({organizationId: organizationId}));
+    }
+  },
+  accountManagementLink: function(userId) {
+    let user = Meteor.users.findOne(userId);
+    if (user.emails[0].verified) {
+      return user.emails[0].verified;
+    }
+  },
+  isMe: function(userId) {
+    let user = Meteor.users.findOne(userId);
+    if (user) {
+      if (user._id == Meteor.userId()) {
+        return true;
+      }
     }
   }
 });
@@ -70,5 +82,10 @@ Template.invite.events({
         console.log(response);
       }
     });
+  },
+  'click .revokeInvite'(event) {
+    console.log(event);
+    let id = $('.revokeInvite').data('id');
+    Meteor.call('revokeInvite', id);
   }
 })
