@@ -7,5 +7,7 @@ Meteor.publish('this.user', function() {
 
 Meteor.publish('organizationUsers', function() {
   let user = Meteor.users.findOne(this.userId);
-  return Meteor.users.find({organizationId: user.organizationId});
+  if (user) {
+    return Meteor.users.find({organizationId: user.organizationId});
+  }
 });
