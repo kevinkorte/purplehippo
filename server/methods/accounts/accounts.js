@@ -8,5 +8,8 @@ Meteor.methods({
         Organizations.update(user.organizationId, {$inc: {quantityUsed: -1}});
       }
     });
+  },
+  firstLogin: function() {
+    Meteor.users.update(Meteor.userId(), {$inc: {loginCount: 1}, $set: {lastLogin: new Date, ip: this.connection.clientAddress}});
   }
 })
