@@ -94,5 +94,18 @@ Template.invite.events({
         Bert.alert('Invitation Successfully Revoked', 'info', 'growl-bottom-left', 'fa-remove')
       }
     });
+  },
+  'click .removeAccount'(event) {
+    let me = Meteor.users.findOne(Meteor.userId());
+    if (Roles.userIsInRole(me._id, 'admin', me.organizationId)) {
+      let id = $('.removeAccount').data('id');
+      Meteor.call('removeAccount', id, function(error, result) {
+        if (error) {
+          console.log(error.reason);
+        } else {
+          Bert.alert('Account Removed Successfully', 'info', 'growl-bottom-left', 'fa-remove');
+        }
+      });
+    }
   }
 })

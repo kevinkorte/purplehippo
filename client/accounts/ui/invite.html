@@ -19,7 +19,7 @@
         {{#if isMe _id}}
           Owner
         {{else}}
-          <button>Remove Account</button>
+          <button class="removeAccount" data-id="{{_id}}">Remove Account</button>
         {{/if}}
       {{else}}
         {{#if isMe _id}}
