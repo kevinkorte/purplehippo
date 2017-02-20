@@ -13,7 +13,8 @@ Template.accountUpdate.events({
       if (error) {
         console.log(error.reason);
       } else {
-        console.log(result)
+        let user = Meteor.findUserByEmail(email);
+        let profileName = user.profile.name;
       }
     });
   }

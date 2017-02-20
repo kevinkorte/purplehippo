@@ -13,9 +13,7 @@ Meteor.methods({
     });
 
     let emailRegex = new RegExp(customer.email, "i");
-    console.log(emailRegex, 'emailRegex');
     let lookupCustomer = Meteor.users.findOne({"emails.address": emailRegex});
-    console.log(lookupCustomer, 'lookupCustomer');
     if (!lookupCustomer) {
       let newCustomer = new Future();
 

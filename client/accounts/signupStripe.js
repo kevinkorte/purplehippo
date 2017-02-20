@@ -46,7 +46,6 @@ Template.signup.rendered = function() {
         password: $('[name="password"]').val(),
         numUsers: $('[name="numUsers"]').val()
       }
-      console.log('init new signup');
       //change submit button to loading here
       Meteor.call('createTrialCustomer', customer, function(error, response) {
         if (error) {
