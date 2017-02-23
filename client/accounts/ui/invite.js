@@ -96,8 +96,11 @@ Template.invite.events({
     });
   },
   'click .removeAccount'(event) {
+    console.log(event);
     let me = Meteor.users.findOne(Meteor.userId());
+    console.log(me);
     if (Roles.userIsInRole(me._id, 'admin', me.organizationId)) {
+      console.log(event);
       let id = $('.removeAccount').data('id');
       Meteor.call('removeAccount', id, function(error, result) {
         if (error) {
