@@ -28,6 +28,10 @@ Template.accountUpdate.events({
                 try {
                   //created new stripe customer and subscription, now need to
                   //update users account with this information
+                  console.log(response);
+                } catch(exception) {
+                  //what to catch?
+                  console.log(exception);
                 }
               }
             })
