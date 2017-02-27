@@ -4,22 +4,20 @@ Template.login.events({
     const target = event.target;
     const email = target.loginEmail.value;
     const password = target.loginPassword.value;
-    Meteor.call('checkLoginStatus', email, function(error, result) {
+    Meteor.loginWithPassword(email,password, function(error, result) {
       if (error) {
-        Session.set('email', email);
-        Session.set('errorMessage', error.reason);
-        FlowRouter.go('accountUpdate');
+        console.log(error.reason);
       } else {
-        Meteor.loginWithPassword(email,password, function(error, result) {
+        Meteor.call('checkLoginStatus', email, function(error, result) {
           if (error) {
-            Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+            console.log(error.reason);
+            Session.set('errorReason', error.reason);
+            FlowRouter.go('accountUpdate');
           } else {
-            Meteor.call('updateLoginInfo', email);
             FlowRouter.go('dashboard');
           }
-        })
-        //Login here
+        });
       }
-    })
+    });
   }
 })

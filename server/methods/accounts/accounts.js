@@ -33,10 +33,17 @@ Meteor.methods({
   addEmail: function(email, oldEmail) {
     check(email, String);
     check(oldEmail, String);
+    console.log(email);
+    console.log(oldEmail);
     let user = Accounts.findUserByEmail(oldEmail);
-    let account = Accounts.addEmail(user._id, email);
-    if (oldEmail != email) {
-      Accounts.removeEmail(user._id, oldEmail);
+    if (user) {
+      console.log(user._id);
+      let account = Accounts.addEmail(user._id, email);
+      if (account) {
+        if (oldEmail != email) {
+          Accounts.removeEmail(user._id, oldEmail);
+        }
+      }
     }
   }
 })
