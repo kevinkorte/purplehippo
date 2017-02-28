@@ -38,11 +38,9 @@ Meteor.methods({
     let user = Accounts.findUserByEmail(oldEmail);
     if (user) {
       console.log(user._id);
-      let account = Accounts.addEmail(user._id, email);
-      if (account) {
-        if (oldEmail != email) {
-          Accounts.removeEmail(user._id, oldEmail);
-        }
+      Accounts.addEmail(user._id, email);
+      if (oldEmail != email) {
+        Accounts.removeEmail(user._id, oldEmail);
       }
     }
   }
