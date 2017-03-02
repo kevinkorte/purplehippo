@@ -59,14 +59,15 @@ Meteor.methods({
                 console.log(error);
               } else {
                 try {
-                  let user = Meteor.userId();
-                  // Meteor.call('removeUserRolesFromOrg', user);
-                  Meteor.call('createOrganization', user, response, stripeCustomer, function(error, result){
+                  let user = Meteor.users.findOne(Meteor.userId());
+                  Meteor.call('removeUserRolesFromOrg', user._id, user.organizationId);
+                  Meteor.call('createOrganization', user._id, response, stripeCustomer, function(error, result){
                     if (error) {
                       console.log(error.reason);
                     } else {
+                      console.log('returned organization id', result);
                       let organization = {organizationId: result};
-                      Meteor.users.update(user, {
+                      Meteor.users.update(user._id, {
                         $set: organization
                       }, function(error, response) {
                         if (error) {
@@ -90,10 +91,9 @@ Meteor.methods({
       }
     }
   },
-  removeUserRolesFromOrg: function(user) {
-    let thisUser = Meteor.users.findOne(user);
-    if (thisUser) {
-      Roles.removeUsersFromRoles(thisUser._id, 'user', user.organizationId);
-    }
+  removeUserRolesFromOrg: function(user, organizationId) {
+      console.log('removeOrg', user, organizationId);
+      Roles.removeUsersFromRoles(user, 'user', organizationId);
+
   }
 })
