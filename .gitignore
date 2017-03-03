@@ -1,2 +1,8 @@
 node_modules/
 dev-settings.json
+client/lib/semantic-ui/definitions/
+client/lib/semantic-ui/site/
+client/lib/semantic-ui/themes/
+client/lib/semantic-ui/semantic.less
+client/lib/semantic-ui/theme.config.import.less
+client/lib/semantic-ui/theme.import.less

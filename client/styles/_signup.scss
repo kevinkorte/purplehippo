@@ -1,0 +1,20 @@
+//Information on shadow mixin
+// https://github.com/mrmlnc/material-shadows
+.signup-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  @include z-depth();
+}
+//contains the form element
+//child of signup wrapper
+.signup-form-wrapper {
+  width: 50%;
+}
+//contains the signup marketing
+//child of signup-wrapper
+.signup-marketing-wrapper{
+  width: 50%;
+  min-height: 1px;
+  background-color: purple;
+}
