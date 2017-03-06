@@ -1,4 +1,31 @@
 <template name="invite">
+  <div class="invite-wrapper">
+    <div class="invite-header">
+      {{#if canAddMoreUsers}}
+      <form class="inviteUser">
+        <input class="floating-input" type="text" name="email">
+        <button type="submit">Send Invite</button>
+      </form>
+      {{/if}}
+      <div class="invite-account-stats">
+        <div class="account-stats-numbers">
+          {{numUsers}} / {{maxUsers}}
+        </div>
+        <div class="account-stats-text">
+          Accounts Used
+        </div>
+      </div>
+    </div>
+    <div class="invite-status-bar" style="width: calc({{numUsers}}/{{maxUsers}} * 100%)"></div>
+    <div class="ui divided selection list">
+      <a class="item">
+        <div class="ui blue horizontal label">Owner</div>
+        Kumquats
+      </a>
+    </div>
+  </div>
+
+
   Used: {{numUsers}} / {{maxUsers}}
 {{#if canAddMoreUsers}}
   <form class="inviteUser">
