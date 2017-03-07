@@ -1,12 +1,20 @@
 <template name="invite">
   <div class="invite-wrapper">
     <div class="invite-header">
-      {{#if canAddMoreUsers}}
-      <form class="inviteUser">
-        <input class="floating-input" type="text" name="email">
-        <button type="submit">Send Invite</button>
-      </form>
-      {{/if}}
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
       <div class="invite-account-stats">
         <div class="account-stats-numbers">
           {{numUsers}} / {{maxUsers}}
@@ -19,8 +27,7 @@
     <div class="invite-status-bar" style="width: calc({{numUsers}}/{{maxUsers}} * 100%)"></div>
     <div class="ui divided selection list">
       <a class="item">
-        <div class="ui blue horizontal label">Owner</div>
-        Kumquats
+        <div class="ui blue horizontal label">Owner</div>Kevin
       </a>
     </div>
   </div>
