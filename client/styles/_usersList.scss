@@ -2,15 +2,21 @@
   width: 85%;
   max-width: 1200px;
   margin: 0 auto;
+  border-radius: 6px;
+}
+.with-border {
   border: 1px solid #ccc;
 }
 .invite-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f9fafb;
-  align-items: flex-end;
-
+  // background-color: #f9fafb;
+  background-color: #eceeef;
+  align-items: center;
+  padding: 10px 14px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .floating-input {
@@ -19,8 +25,30 @@
   border-radius: 3px;
   box-shadow: 0 0 0 0.5px rgba(49,49,93,.03), 0 2px 5px 0 rgba(49,49,93,.1), 0 1px 2px 0 rgba(0,0,0,.08);
 }
+.send-invite {
+  display: flex;
+  flex-basis: 50%;
+  & input.floating-input {
+    flex-grow: 1;
+    margin-right: 6px;
+  }
+  & input.floating-input:active,
+  & input.floating-input:focus {
+    outline: 0;
+    border: 1px solid #cbb5e4;
+  }
+}
+.ui.button.invite-button {
+  background-color: lighten(#614385, 20%);
+  box-shadow: 0 0 0 0.5px rgba(49,49,93,.03), 0 2px 5px 0 rgba(49,49,93,.1), 0 1px 2px 0 rgba(0,0,0,.08);
+  color: #fff;
+  &:hover {
+    background-color: #614385;
+  }
+}
 .invite-account-stats {
   text-align: center;
+  color: #8e9598;
 }
 .account-stats-numbers {
   font-size: 22px
@@ -29,7 +57,14 @@
   text-transform: uppercase;
   font-size: 10px;
 }
-
+.accounts-title {
+  text-align: center;
+  color: #86838a;
+  padding: 8px 0;
+}
+.account-label {
+  flex-basis: 100px;
+}
 //Status Bar showing number of user accounts available
 // .invite-status-bar {
 //   height: 3px;

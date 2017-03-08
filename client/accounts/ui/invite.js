@@ -47,6 +47,16 @@ Template.invite.helpers({
       // }
       return Roles.userIsInRole(userId, 'owner', user.organizationId);
     }
+  },
+  getUserLabel(id) {
+    let user = Meteor.users.findOne(id);
+    if (Roles.userIsInRole(id, 'owner', user.organizationId)) {
+      return '<div class="ui black horizontal label">Owner</div>';
+    } else if (Roles.userIsInRole(id, 'admin', user.organizationId)) {
+      return '<div class="ui blue horizontal label">Admin</div>';
+    } else {
+      return '<div class="ui horizontal label">User</div>';
+    }
   }
 });
 
@@ -111,4 +121,4 @@ Template.invite.events({
       });
     }
   }
-})
+});

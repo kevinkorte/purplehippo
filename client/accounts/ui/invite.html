@@ -1,20 +1,13 @@
 <template name="invite">
   <div class="invite-wrapper">
+    <h2>Manage Users</h2>
+  </div>
+  <div class="invite-wrapper with-border">
     <div class="invite-header">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
+      <form class="send-invite">
+        <input class="floating-input" type="email">
+        <button class="mini ui button invite-button">Send Invite</button>
+      </form>
       <div class="invite-account-stats">
         <div class="account-stats-numbers">
           {{numUsers}} / {{maxUsers}}
@@ -24,10 +17,17 @@
         </div>
       </div>
     </div>
+    <h5 class="accounts-title">Organization Accounts</h5>
     <div class="ui divided selection list">
-      <a class="item">
-        <div class="ui blue horizontal label">Owner</div>Kevin
+      {{#each users}}
+      <a class="item d-flex">
+        <div class="account-info d-flex">
+          <div class="account-label">{{{getUserLabel _id}}}</div>
+          {{emails.[0].address}}
+        </div>
+        <button class="ui button">Follow</button>
       </a>
+      {{/each}}
     </div>
   </div>
 
