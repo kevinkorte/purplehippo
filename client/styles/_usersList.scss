@@ -8,8 +8,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ccc;
-  padding: 8px 4px;
+  background-color: #f9fafb;
+  align-items: flex-end;
+
 }
 
 .floating-input {
@@ -30,7 +31,7 @@
 }
 
 //Status Bar showing number of user accounts available
-.invite-status-bar {
-  height: 3px;
-  background-color: #6441A5;
-}
+// .invite-status-bar {
+//   height: 3px;
+//   background-color: #6441A5;
+// }
