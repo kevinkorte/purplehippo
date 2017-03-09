@@ -2,11 +2,14 @@
   <div class="invite-wrapper">
     <h2>Manage Users</h2>
   </div>
+
+
+
   <div class="invite-wrapper with-border">
     <div class="invite-header">
-      <form class="send-invite">
-        <input class="floating-input" type="email">
-        <button class="mini ui button invite-button">Send Invite</button>
+      <form class="send-invite inviteUser">
+        <input class="floating-input" type="email" name="email">
+        <button type="submit" class="ui button invite-button">Send Invite</button>
       </form>
       <div class="invite-account-stats">
         <div class="account-stats-numbers">
@@ -17,7 +20,9 @@
         </div>
       </div>
     </div>
-    <h5 class="accounts-title">Organization Accounts</h5>
+
+      <h5 class="accounts-title">Organization Accounts</h5>
+
     <div class="ui divided selection list">
       {{#each users}}
       <a class="item d-flex">
@@ -29,7 +34,7 @@
           {{#if isOwner _id}}
           Owner
           {{else}}
-            <button class="removeAccount ui basic buttont" data-id="{{_id}}">Remove Account</button>
+            <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
           {{/if}}
         {{else}}
           {{#if isOwner _id}}
@@ -76,5 +81,12 @@
     </li>
   {{/each}}
 </ul>
+
+
+<div id="modal" class="ui modal">
+  <div class="header">Header</div>
+  <div class="content">
+  </div>
+</div>
 
 </template>
