@@ -21,7 +21,7 @@
 
 .floating-input {
   border: 0;
-  padding: 4px 3px;
+  padding: 9px 10px;
   border-radius: 3px;
   box-shadow: 0 0 0 0.5px rgba(49,49,93,.03), 0 2px 5px 0 rgba(49,49,93,.1), 0 1px 2px 0 rgba(0,0,0,.08);
 }
@@ -62,8 +62,8 @@
   color: #86838a;
   padding: 8px 0;
 }
-.account-label {
-  flex-basis: 100px;
+.account-info {
+  flex-grow: 1;
 }
 //Status Bar showing number of user accounts available
 // .invite-status-bar {

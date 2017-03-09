@@ -48,6 +48,13 @@ Template.invite.helpers({
       return Roles.userIsInRole(userId, 'owner', user.organizationId);
     }
   },
+  isOwner(id) {
+    let user = Meteor.users.findOne(id);
+    console.log(user);
+    if (Roles.userIsInRole(id, 'owner', user.organizationId)) {
+      return Roles.userIsInRole(id, 'owner', user.organizationId);
+    }
+  },
   getUserLabel(id) {
     let user = Meteor.users.findOne(id);
     if (Roles.userIsInRole(id, 'owner', user.organizationId)) {

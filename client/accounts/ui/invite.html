@@ -21,11 +21,23 @@
     <div class="ui divided selection list">
       {{#each users}}
       <a class="item d-flex">
-        <div class="account-info d-flex">
+        <div class="account-info d-flex align-items-center">
           <div class="account-label">{{{getUserLabel _id}}}</div>
-          {{emails.[0].address}}
+          <div class="account-email">{{emails.[0].address}}</div>
         </div>
-        <button class="ui button">Follow</button>
+        {{#if accountManagementLink _id}}
+          {{#if isOwner _id}}
+          Owner
+          {{else}}
+            <button class="removeAccount ui basic buttont" data-id="{{_id}}">Remove Account</button>
+          {{/if}}
+        {{else}}
+          {{#if isOwner _id}}
+          Owner
+          {{else}}
+            <button class="revokeInvite ui basic button" data-id="{{_id}}">Revoke Invite</button>
+          {{/if}}
+        {{/if}}
       </a>
       {{/each}}
     </div>
