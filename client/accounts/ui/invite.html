@@ -23,29 +23,34 @@
 
       <h5 class="accounts-title">Organization Accounts</h5>
 
-    <div class="ui divided selection list">
+    <div class="ui middle aligned divided selection list">
       {{#each users}}
-      <a class="item d-flex">
-        <div class="account-info d-flex align-items-center">
-          <div class="account-label">{{{getUserLabel _id}}}</div>
-          <div class="account-email">{{emails.[0].address}}</div>
+      <div class="item">
+        <div class="right floated content">
+          {{#if accountManagementLink _id}}
+            {{#if isOwner _id}}
+            Owner
+            {{else}}
+              <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
+            {{/if}}
+          {{else}}
+            {{#if isOwner _id}}
+            Owner
+            {{else}}
+              <button class="revokeInvite ui basic button" data-id="{{_id}}">Revoke Invite</button>
+            {{/if}}
+          {{/if}}
         </div>
-        {{#if accountManagementLink _id}}
-          {{#if isOwner _id}}
-          Owner
-          {{else}}
-            <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
-          {{/if}}
-        {{else}}
-          {{#if isOwner _id}}
-          Owner
-          {{else}}
-            <button class="revokeInvite ui basic button" data-id="{{_id}}">Revoke Invite</button>
-          {{/if}}
-        {{/if}}
-      </a>
+
+        <div class="content">
+          {{{getUserLabel _id}}}
+          {{emails.[0].address}}
+        </div>
+      </div>
       {{/each}}
+
     </div>
+
   </div>
 
 
