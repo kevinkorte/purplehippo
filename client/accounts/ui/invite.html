@@ -1,4 +1,90 @@
 <template name="invite">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="ui secondary vertical pointing menu">
+          <a class="active item">
+            Home
+          </a>
+          <a class="item">
+            Messages
+          </a>
+          <a class="item">
+            Friends
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-auto">
+
+        <div class="invite-wrapper with-border">
+          <div class="invite-header">
+            <form class="send-invite inviteUser">
+              <input class="floating-input" type="email" name="email">
+              <button type="submit" class="theme-purple ui button invite-button">Send Invite</button>
+            </form>
+            <div class="invite-account-stats">
+              <div class="account-stats-numbers">
+                {{numUsers}} / {{maxUsers}}
+              </div>
+              <div class="account-stats-text">
+                Accounts Used
+              </div>
+            </div>
+          </div>
+
+            <h5 class="accounts-title">Organization Accounts</h5>
+
+          <div class="ui middle aligned divided selection list">
+            {{#each users}}
+            <div class="item">
+              <div class="right floated content">
+                {{#if accountManagementLink _id}}
+                  {{#if isOwner _id}}
+                  Owner
+                  {{else}}
+                    <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
+                  {{/if}}
+                {{else}}
+                  {{#if isOwner _id}}
+                  Owner
+                  {{else}}
+                    <button class="revokeInvite ui basic button" data-id="{{_id}}">Revoke Invite</button>
+                  {{/if}}
+                {{/if}}
+              </div>
+
+              <div class="content">
+                {{{getUserLabel _id}}}
+                {{emails.[0].address}}
+              </div>
+            </div>
+            {{/each}}
+
+          </div>
+
+
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class="invite-wrapper">
     <h2>Manage Users</h2>
   </div>
