@@ -1,23 +1,34 @@
 <template name="invite">
 
+
   <div class="container">
     <div class="row">
       <div class="col-lg-3">
-        <div class="ui secondary vertical pointing menu">
-          <a class="active item">
-            Home
+
+        <nav class="nav nav-pills flex-column">
+          <a class="nav-link" href="#"><i class="settings icon"></i> My Settings</a>
+          <a class="nav-link {{isActiveRoute 'manageUsers'}}" href="#"><i class="users icon"></i> Manage Users</a>
+          <a class="nav-link" href="#"><i class="payment icon"></i> Payment</a>
+        </nav>
+
+
+
+        <div class="ui secondary vertical pointing menu fluid">
+          <a class="item">
+            My Account
+          </a>
+          <a class="{{isActiveRoute 'manageUsers'}} item">
+            <i class="users icon"></i>
+            Manage Users
           </a>
           <a class="item">
-            Messages
-          </a>
-          <a class="item">
-            Friends
+            Payment
           </a>
         </div>
       </div>
-      <div class="col-lg-auto">
+      <div class="col-lg-9">
 
-        <div class="invite-wrapper with-border">
+        <div class="invite-wrapper with-border full-width">
           <div class="invite-header">
             <form class="send-invite inviteUser">
               <input class="floating-input" type="email" name="email">
@@ -33,94 +44,22 @@
             </div>
           </div>
 
-            <h5 class="accounts-title">Organization Accounts</h5>
-
-          <div class="ui middle aligned divided selection list">
-            {{#each users}}
-            <div class="item">
-              <div class="right floated content">
-                {{#if accountManagementLink _id}}
-                  {{#if isOwner _id}}
-                  Owner
-                  {{else}}
-                    <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
-                  {{/if}}
-                {{else}}
-                  {{#if isOwner _id}}
-                  Owner
-                  {{else}}
-                    <button class="revokeInvite ui basic button" data-id="{{_id}}">Revoke Invite</button>
-                  {{/if}}
-                {{/if}}
-              </div>
-
-              <div class="content">
-                {{{getUserLabel _id}}}
-                {{emails.[0].address}}
-              </div>
-            </div>
-            {{/each}}
-
-          </div>
 
 
-
-
-</div>
-
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="invite-wrapper">
-    <h2>Manage Users</h2>
-  </div>
-
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col-2 col-md-auto">
-        <div class="ui secondary vertical pointing menu">
+          <div class="ui secondary pointing menu">
   <a class="active item">
-    Home
+    Active Users
   </a>
   <a class="item">
-    Messages
+    Removed Users
   </a>
   <a class="item">
-    Friends
+    Admins
   </a>
 </div>
-      </div>
-      <div class="col-12 col-md-auto">
-        <div class="invite-wrapper with-border">
-          <div class="invite-header">
-            <form class="send-invite inviteUser">
-              <input class="floating-input" type="email" name="email">
-              <button type="submit" class="theme-purple ui button invite-button">Send Invite</button>
-            </form>
-            <button type="submit" class="ui button gray invite-button">Update Number of Accounts</button>
-            <div class="invite-account-stats">
-              <div class="account-stats-numbers">
-                {{numUsers}} / {{maxUsers}}
-              </div>
-              <div class="account-stats-text">
-                Accounts Used
-              </div>
-            </div>
-          </div>
+<div class="ui segment">
+  <p></p>
+</div>
 
             <h5 class="accounts-title">Organization Accounts</h5>
 
@@ -133,6 +72,29 @@
                   Owner
                   {{else}}
                     <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
+
+
+
+                    <div class="ui floating labeled icon dropdown button">
+  <i class="tasks icon"></i>
+  <span class="text">Actions</span>
+  <div class="menu">
+    <div class="item">
+      <i class="attention icon"></i>
+      Make Admin
+    </div>
+    <div class="item">
+      <i class="remove user icon"></i>
+      Remove Account
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
                   {{/if}}
                 {{else}}
                   {{#if isOwner _id}}
@@ -152,61 +114,19 @@
 
           </div>
 
-        </div>
+
+
+
+</div>
+
       </div>
     </div>
   </div>
 
 
 
-  <div class="invite-wrapper with-border">
-    <div class="invite-header">
-      <form class="send-invite inviteUser">
-        <input class="floating-input" type="email" name="email">
-        <button type="submit" class="theme-purple ui button invite-button">Send Invite</button>
-      </form>
-      <button type="submit" class="ui button gray invite-button">Update Number of Accounts</button>
-      <div class="invite-account-stats">
-        <div class="account-stats-numbers">
-          {{numUsers}} / {{maxUsers}}
-        </div>
-        <div class="account-stats-text">
-          Accounts Used
-        </div>
-      </div>
-    </div>
 
-      <h5 class="accounts-title">Organization Accounts</h5>
 
-    <div class="ui middle aligned divided selection list">
-      {{#each users}}
-      <div class="item">
-        <div class="right floated content">
-          {{#if accountManagementLink _id}}
-            {{#if isOwner _id}}
-            Owner
-            {{else}}
-              <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
-            {{/if}}
-          {{else}}
-            {{#if isOwner _id}}
-            Owner
-            {{else}}
-              <button class="revokeInvite ui basic button" data-id="{{_id}}">Revoke Invite</button>
-            {{/if}}
-          {{/if}}
-        </div>
-
-        <div class="content">
-          {{{getUserLabel _id}}}
-          {{emails.[0].address}}
-        </div>
-      </div>
-      {{/each}}
-
-    </div>
-
-  </div>
 
 
   Used: {{numUsers}} / {{maxUsers}}

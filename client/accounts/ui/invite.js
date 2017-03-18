@@ -128,9 +128,7 @@ Template.invite.events({
       });
     }
   },
-  'click .item'(event) {
-    event.preventDefault();
-    console.log(event);
-    $('#modal').modal('show');
+  'click .ui.dropdown'(event) {
+    $(event.currentTarget).dropdown('toggle');
   }
 });

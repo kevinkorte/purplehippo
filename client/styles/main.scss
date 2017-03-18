@@ -1,6 +1,7 @@
 @import "{}/node_modules/bootstrap/scss/bootstrap.scss";
 @import '../../node_modules/material-shadows/material-shadows.scss';
 
+@import 'helpers';
 @import 'signup';
 @import 'menus';
 @import 'usersList';
