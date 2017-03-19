@@ -30,7 +30,7 @@ Template.invite.helpers({
     let user = Meteor.users.findOne(Meteor.userId());
     if (user) {
       let organizationId = user.organizationId;
-      return Meteor.users.find({organizationId: organizationId});
+      return Meteor.users.find({organizationId: organizationId, accountActive: true});
     }
   },
   accountManagementLink: function(userId) {
@@ -128,7 +128,33 @@ Template.invite.events({
       });
     }
   },
-  'click .ui.dropdown'(event) {
-    $(event.currentTarget).dropdown('toggle');
+  'click .removeAccount'(event) {
+    console.log(event.currentTarget);
+    let userId = $(event.currentTarget).data("id");
+    swal({
+      title: "Are you sure?",
+      text: "This will remove this user from your organization.",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Remove User",
+      closeOnConfirm: false,
+      showLoaderOnConfirm: true
+    }, function() {
+      Meteor.call('removeAccount', userId, function(error, result) {
+        if (error) {
+          console.log(error.reason);
+        } else {
+          console.log(result);
+          swal({
+            title: "Success",
+            timer: 2000,
+            showConfirmButton: false,
+            type: "success"
+          });
+        }
+      });
+      console.log("Call this meteor method");
+    });
   }
 });
