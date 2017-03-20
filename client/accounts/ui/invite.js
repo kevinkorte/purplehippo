@@ -113,48 +113,46 @@ Template.invite.events({
     });
   },
   'click .removeAccount'(event) {
-    console.log(event);
     let me = Meteor.users.findOne(Meteor.userId());
-    console.log(me);
+    let userId = $(event.currentTarget).data("id");
     if (Roles.userIsInRole(me._id, 'admin', me.organizationId)) {
-      console.log(event);
-      let id = $('.removeAccount').data('id');
-      Meteor.call('removeAccount', id, function(error, result) {
-        if (error) {
-          console.log(error.reason);
-        } else {
-          Bert.alert('Account Removed Successfully', 'info', 'growl-bottom-left', 'fa-remove');
-        }
+      swal({
+        title: "Are you sure?",
+        text: "This will remove this user from your organization.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Remove User",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
+      }, function() {
+        Meteor.call('removeAccount', userId, function(error, result) {
+          if (error) {
+            console.log(error.reason);
+          } else {
+            console.log(result);
+            swal({
+              title: "Success",
+              timer: 2000,
+              showConfirmButton: false,
+              type: "success"
+            });
+          }
+        });
       });
     }
   },
-  'click .removeAccount'(event) {
-    console.log(event.currentTarget);
+  'click .makeAdmin'(event) {
+    let me = Meteor.users.findOne(Meteor.userId());
     let userId = $(event.currentTarget).data("id");
-    swal({
-      title: "Are you sure?",
-      text: "This will remove this user from your organization.",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: "Remove User",
-      closeOnConfirm: false,
-      showLoaderOnConfirm: true
-    }, function() {
-      Meteor.call('removeAccount', userId, function(error, result) {
+    if (Roles.userIsInRole(me._id, 'admin', me.organizationId)) {
+      Meteor.call('makeUserAdmin', userId, function(error, result) {
         if (error) {
           console.log(error.reason);
         } else {
           console.log(result);
-          swal({
-            title: "Success",
-            timer: 2000,
-            showConfirmButton: false,
-            type: "success"
-          });
         }
       });
-      console.log("Call this meteor method");
-    });
+    }
   }
 });

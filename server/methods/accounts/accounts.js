@@ -24,6 +24,11 @@ Meteor.methods({
   removeAccount: function(id) {
     let user = Meteor.users.findOne(id);
     Meteor.users.update(id, {$set: {accountActive: false}});
+    Organizations.update(user.organizationId, {$inc: {quantityUsed: -1}});
+  },
+  makeUserAdmin(id) {
+    let user = Meteor.users.findOne(id);
+    Roles.setUserRoles(id, 'admin', user.organizationId);
   },
   checkLoginStatus: function(email) {
     let user = Accounts.findUserByEmail(email);
