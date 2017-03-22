@@ -7,24 +7,14 @@
 
         <nav class="nav nav-pills flex-column">
           <a class="nav-link" href="#"><i class="settings icon"></i> My Settings</a>
+          {{#each users}}
+          {{#if canVisitAdminMenu}}
           <a class="nav-link {{isActiveRoute 'manageUsers'}}" href="#"><i class="users icon"></i> Manage Users</a>
           <a class="nav-link" href="#"><i class="payment icon"></i> Payment</a>
+          {{/if}}
+          {{/each}}
         </nav>
 
-
-
-        <div class="ui secondary vertical pointing menu fluid">
-          <a class="item">
-            My Account
-          </a>
-          <a class="{{isActiveRoute 'manageUsers'}} item">
-            <i class="users icon"></i>
-            Manage Users
-          </a>
-          <a class="item">
-            Payment
-          </a>
-        </div>
       </div>
       <div class="col-lg-9">
 
