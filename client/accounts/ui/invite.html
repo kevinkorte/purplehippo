@@ -72,8 +72,11 @@
                   Owner
                   {{else}}
                     <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
+                    {{#if isAdmin _id}}
+                    <button class="removeAdmin ui basic button" data-id="{{_id}}">Remove Admin</button>
+                    {{else}}
                     <button class="makeAdmin ui basic button" data-id="{{_id}}">Make Admin</button>
-
+                    {{/if}}
 
                   {{/if}}
                 {{else}}

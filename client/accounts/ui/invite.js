@@ -55,6 +55,12 @@ Template.invite.helpers({
       return Roles.userIsInRole(id, 'owner', user.organizationId);
     }
   },
+  isAdmin(id) {
+    let user = Meteor.users.findOne(id);
+    if (Roles.userIsInRole(id, 'admin', user.organizationId)) {
+      return true;
+    }
+  },
   getUserLabel(id) {
     let user = Meteor.users.findOne(id);
     if (Roles.userIsInRole(id, 'owner', user.organizationId)) {
@@ -148,9 +154,22 @@ Template.invite.events({
     if (Roles.userIsInRole(me._id, 'admin', me.organizationId)) {
       Meteor.call('makeUserAdmin', userId, function(error, result) {
         if (error) {
-          console.log(error.reason);
+          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o');
         } else {
-          console.log(result);
+          Bert.alert( 'User successfully added as an admin', 'success', 'growl-top-right', 'fa-check');
+        }
+      });
+    }
+  },
+  'click .removeAdmin'(event) {
+    let me = Meteor.users.findOne(Meteor.userId());
+    let userId = $(event.currentTarget).data("id");
+    if (Roles.userIsInRole(me._id, 'admin', me.organizationId)) {
+      Meteor.call('removeUserAdmin', userId, function(error, result) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o');
+        } else {
+          Bert.alert( 'User successfully removed as an admin', 'success', 'growl-top-right', 'fa-check');
         }
       });
     }

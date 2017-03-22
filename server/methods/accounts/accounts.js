@@ -30,6 +30,10 @@ Meteor.methods({
     let user = Meteor.users.findOne(id);
     Roles.setUserRoles(id, 'admin', user.organizationId);
   },
+  removeUserAdmin(id) {
+    let user = Meteor.users.findOne(id);
+    Roles.removeUsersFromRoles(id, 'admin', user.organizationId);
+  },
   checkLoginStatus: function(email) {
     let user = Accounts.findUserByEmail(email);
     if (user) {
