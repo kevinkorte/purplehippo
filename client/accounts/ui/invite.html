@@ -9,8 +9,8 @@
           <a class="nav-link" href="#"><i class="settings icon"></i> My Settings</a>
 
           {{#if canVisitAdminMenu}}
-          <a class="nav-link {{isActiveRoute 'manageUsers'}}" href="#"><i class="users icon"></i> Manage Users</a>
-          <a class="nav-link" href="#"><i class="payment icon"></i> Payment</a>
+          <a class="nav-link {{isActiveRoute 'manageUsers'}}" href="{{pathFor 'manageUsers'}}"><i class="users icon"></i> Manage Users</a>
+          <a class="nav-link {{isActiveRoute 'managePayment'}}" href="{{pathFor 'managePayment'}}"><i class="payment icon"></i> Payment</a>
           {{/if}}
 
         </nav>

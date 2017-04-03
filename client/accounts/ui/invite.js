@@ -61,12 +61,6 @@ Template.invite.helpers({
       return true;
     }
   },
-  canVisitAdminMenu() {
-    let me = Meteor.users.findOne(Meteor.userId());
-    if ( Roles.userIsInRole(me._id, 'admin', me.organizationId)) {
-      return true;
-    }
-  },
   getUserLabel(id) {
     let user = Meteor.users.findOne(id);
     if (Roles.userIsInRole(id, 'owner', user.organizationId)) {
