@@ -7,12 +7,12 @@
 
         <nav class="nav nav-pills flex-column">
           <a class="nav-link" href="#"><i class="settings icon"></i> My Settings</a>
-          {{#each users}}
+
           {{#if canVisitAdminMenu}}
           <a class="nav-link {{isActiveRoute 'manageUsers'}}" href="#"><i class="users icon"></i> Manage Users</a>
           <a class="nav-link" href="#"><i class="payment icon"></i> Payment</a>
           {{/if}}
-          {{/each}}
+
         </nav>
 
       </div>

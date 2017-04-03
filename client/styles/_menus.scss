@@ -26,3 +26,17 @@ background: linear-gradient(to left, #614385 , #516395); /* W3C, IE 10+/ Edge, F
 .navbar {
   margin-bottom: 15px;
 }
+
+.nav-pills .nav-link {
+  color: #9475b9;
+  &:hover {
+    color: #614385;
+  }
+}
+.nav-pills .nav-link.active {
+  background-color: #9475b9;
+  &:hover {
+    background-color: #614385;
+    color: #fff;
+  }
+}
