@@ -41,7 +41,7 @@ Meteor.methods({
                   if (error) {
                     console.log(error.reason);
                   } else {
-                    let organization = {organizationId: result}
+                    let organization = {organizationId: result, accountActive: true}
                     console.log('organization id', organization);
                     Meteor.users.update(user, {
                       $set: organization

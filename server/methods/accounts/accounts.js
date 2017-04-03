@@ -75,7 +75,7 @@ Meteor.methods({
                       console.log(error.reason);
                     } else {
                       console.log('returned organization id', result);
-                      let organization = {organizationId: result};
+                      let organization = {organizationId: result, accountActive: true};
                       Meteor.users.update(user._id, {
                         $set: organization
                       }, function(error, response) {
