@@ -1,0 +1,9 @@
+.header .content,
+.header .icon {
+  @extend .text-blue;
+}
+.header .btn {
+  margin: 20px 0;
+  background: -webkit-linear-gradient(to left, #614385 , #516395);
+  background: linear-gradient(to left, #614385 , #516395);
+}

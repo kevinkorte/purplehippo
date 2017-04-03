@@ -1,4 +1,19 @@
 <template name="dashboard">
   {{> navbar}}
+  <div class="container">
+    {{#if isActivePath '/dashboard'}}
+      <div class="row justify-content-md-center align-items-center">
+        <h2 class="ui icon header">
+        <i class="hand spock icon"></i>
+        <div class="content">
+          Hello, there!
+          <div class="sub header">Your dashboard will begin to fill once you start creating appointments.</div>
+          <a href="#" role="button" class="btn btn-primary btn-lg btn-block">Create an Appointment</a>
+        </div>
+      </h2>
+      </div>
+    {{/if}}
+  </div>
+
   {{> Template.dynamic template=content}}
 </template>
