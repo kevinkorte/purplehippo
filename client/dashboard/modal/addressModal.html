@@ -1,0 +1,17 @@
+<template name="addressModal">
+  <!-- Modal -->
+  <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body js-addressModal-body addressModal-body">
+          <form class="address-form">
+            <input type="text" name="address" class="js-geocomplete-input addressModal-input">
+            <input type="hidden" name="lat">
+            <input type="hidden" name="lng">
+            <button type="submit" class="btn btn-success">Setup</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

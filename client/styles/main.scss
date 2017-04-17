@@ -7,3 +7,14 @@
 @import 'usersList';
 @import 'text';
 @import 'dashboard';
+@import 'forms';
+
+@media (min-width: 576px) {
+  .pac-container {
+    border-radius: 4.2px !important;
+    width: 498px !important;
+    left: 551px !important;
+    top: 100px !important;
+    z-index: 1200;
+  }
+}

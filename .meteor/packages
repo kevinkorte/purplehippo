@@ -44,3 +44,7 @@ zimme:active-route
 fortawesome:fontawesome
 kevohagan:sweetalert
 momentjs:moment
+jeremy:geocomplete
+dburles:google-maps
+mdg:geolocation
+aldeed:geocoder

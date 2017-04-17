@@ -8,7 +8,7 @@
         <div class="content">
           Hello, there!
           <div class="sub header">Your dashboard will begin to fill once you start creating appointments.</div>
-          <a href="#" role="button" class="btn btn-primary btn-lg btn-block">Create an Appointment</a>
+          <button class="btn btn-primary btn-lg btn-block js-create-new-event" data-toggle="modal" data-target="#addressModal">Create an Appointment</button>
         </div>
       </h2>
       </div>
@@ -16,4 +16,5 @@
   </div>
 
   {{> Template.dynamic template=content}}
+  {{> addressModal }}
 </template>
