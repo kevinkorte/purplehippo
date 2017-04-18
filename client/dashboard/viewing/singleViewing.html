@@ -1,0 +1,15 @@
+<template name="singleViewing">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        {{#with viewing}}
+          <div class="address">
+            {{address}}
+          </div>
+        {{/with}}
+        <div id="map" class="map">{{> googleMap name="viewingMap" options=viewingMapOptions }}</div>
+      </div>
+    </div>
+  </div>
+
+</template>

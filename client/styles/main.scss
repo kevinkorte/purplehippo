@@ -9,6 +9,10 @@
 @import 'dashboard';
 @import 'forms';
 
+.map {
+  height: 500px;
+}
+
 @media (min-width: 576px) {
   .pac-container {
     border-radius: 4.2px !important;
