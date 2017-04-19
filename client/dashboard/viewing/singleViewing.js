@@ -25,5 +25,8 @@ Template.singleViewing.onRendered(function() {
       map: map.instance,
       draggable: true,
     });
+    map.instance.addListener('dragend', function() {
+      window.alert('Map was clicked');
+    })
   });
 });

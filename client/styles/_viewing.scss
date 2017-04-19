@@ -1,0 +1,19 @@
+.viewing {
+  display: flex;
+}
+.location {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 80%;
+  height: calc(100vh - 65px);
+}
+.address {
+  width: 100%;
+  font-size: 28px;
+  padding: 15px 0;
+}
+.map {
+height: calc(100% - 72px);
+  width: 100%;
+}

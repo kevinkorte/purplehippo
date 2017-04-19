@@ -8,10 +8,8 @@
 @import 'text';
 @import 'dashboard';
 @import 'forms';
+@import 'viewing';
 
-.map {
-  height: 500px;
-}
 
 @media (min-width: 576px) {
   .pac-container {
