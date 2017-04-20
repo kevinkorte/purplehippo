@@ -25,8 +25,16 @@ Template.singleViewing.onRendered(function() {
       map: map.instance,
       draggable: true,
     });
-    map.instance.addListener('dragend', function() {
-      window.alert('Map was clicked');
-    })
+    marker.addListener('dragend', function(event) {
+      console.log(event.latLng.lat());
+      let id = FlowRouter.getParam('id');
+      let lat = event.latLng.lat();
+      let lng = event.latLng.lng();
+      Meteor.call('updateMapMarker', id, lat, lng, function(error) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+        }
+      });
+    });
   });
 });
