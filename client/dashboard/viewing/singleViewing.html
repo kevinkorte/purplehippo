@@ -1,15 +1,37 @@
 <template name="singleViewing">
-  <div class="viewing">
-    <div class="location">
-      {{#with viewing}}
-        <div class="address">
-          {{address}}
+  <div class="full-width-viewing-header">
+    {{#with viewing}}
+      <div class="address">
+        {{address}}
+      </div>
+    {{/with}}
+
+    <div class="invite-bar">
+      <div class="invited-users">
+        <div class="ui circular labels">
+          <div class="ui label">kevinkorte15@gmail.com</div>
         </div>
-      {{/with}}
+      </div>
+      <form class="invite-user-form">
+        <div class="floating-input invite-user">
+          <input class="invite-email" type="email" name="email">
+          <button type="submit" class="theme-purple ui button invite-button">Send Invite</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="viewing">
+
+    <div class="location">
+
       <div id="map" class="map">{{> googleMap name="viewingMap" options=viewingMapOptions }}</div>
     </div>
 
+
+
   </div>
+
+
 
 
 </template>

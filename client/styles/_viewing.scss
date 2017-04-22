@@ -14,6 +14,37 @@
   padding: 15px 0;
 }
 .map {
-height: calc(100% - 72px);
+height: calc(100% - 119px);
   width: 100%;
+}
+.invite-bar {
+  width: 100%;
+  display: flex;
+  padding: 12px 6px;
+  & .ui.label {
+    margin-bottom: 0;
+  }
+}
+.invited-users {
+  flex-grow: 1;
+}
+.invite-user-form {
+  width: 400px;
+  background: #fff;
+}
+.invite-user {
+  display: flex;
+  width: 100%;
+  border: 1px solid #ccc;
+    padding: 5px 6px;
+   & input {
+     border: none;
+     flex-grow: 1;
+   }
+}
+.invite-email {
+  &:active,
+  &:focus {
+    outline: 0;
+  }
 }

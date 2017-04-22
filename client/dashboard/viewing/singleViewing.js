@@ -26,7 +26,6 @@ Template.singleViewing.onRendered(function() {
       draggable: true,
     });
     marker.addListener('dragend', function(event) {
-      console.log(event.latLng.lat());
       let id = FlowRouter.getParam('id');
       let lat = event.latLng.lat();
       let lng = event.latLng.lng();
