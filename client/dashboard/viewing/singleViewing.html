@@ -1,10 +1,17 @@
 <template name="singleViewing">
   <div class="full-width-viewing-header">
-    {{#with viewing}}
-      <div class="address">
-        {{address}}
-      </div>
-    {{/with}}
+    <div class="flex-header">
+      {{#with viewing}}
+        <div class="address">
+          {{address}}
+        </div>
+        <div class="action-buttons">
+          <button>Add Email Follower</button>
+          <button>Add Text Follower</button>
+        </div>
+      {{/with}}
+    </div>
+
 
     <div class="invite-bar">
       <div class="invited-users">

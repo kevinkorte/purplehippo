@@ -1,6 +1,13 @@
 .viewing {
   display: flex;
 }
+.flex-header {
+  display: flex;
+}
+.action-buttons {
+  flex-grow: 1;
+  display: table;
+}
 .location {
   display: flex;
   flex-wrap: wrap;
