@@ -6,7 +6,9 @@
           {{address}}
         </div>
         <div class="action-buttons">
-          <button>Add Email Follower</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
           <button>Add Text Follower</button>
         </div>
       {{/with}}
@@ -39,6 +41,38 @@
   </div>
 
 
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <nav class="nav">
+  <a class="nav-link active" href="#">Add Phone</a>
+  <a class="nav-link" href="#">Add Email</a>
+</nav>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
+            <div class="col-10">
+              <input class="form-control" type="tel" placeholder="5551235555" pattern="\d{3}[\]\d{3}[\]\d{4}" id="tel-input" aria-describedby="passwordHelpBlock">
+              <p id="passwordHelpBlock" class="form-text text-muted">Enter the 10 digit phone number with no dashes or parenthesis. Ex: 5551235555
+</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 </template>
