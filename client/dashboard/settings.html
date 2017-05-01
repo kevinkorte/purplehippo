@@ -1,0 +1,62 @@
+<template name="settings">
+  <h4 class="ui horizontal divider header">
+    <i class="user icon"></i>
+    User
+  </h4>
+  <h2>{{ user.profile.name }}</h2>
+  <h4 class="ui horizontal divider header">
+    <i class="privacy icon"></i>
+    Password
+  </h4>
+  <button class="btn btn-primary" data-toggle="modal" data-target="#resetPasswordModal">Change Password</button>
+  <button type="button" class="btn btn-link">Reset My Forgotten Password</button>
+  <h4 class="ui horizontal divider header">
+    <i class="protect icon"></i>
+    Remote Log Out
+  </h4>
+
+  <div class="modal fade" id="resetPasswordModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Password</h5>
+        <button type="button" class="close js-modal-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="js-reset-password">
+      <div class="modal-body">
+        {{#if changePasswordError}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Oh snap!</strong> {{changePasswordError}}. <button class="btn btn-link alert-link .js-reset-password">Reset my password</button>
+        </div>
+        {{/if}}
+        <div class="form-group">
+          <label for="currentPassword">Current Password</label>
+          <input type="password" name="currentPassword" class="form-control" id="currentPassword" aria-describedby="passwordHelp" placeholder="Current Password">
+          <small id="passwordHelp" class="form-text text-muted">If you've forgotten your current password, we'll <a href="#" class="js-reset-password">email you a reset link.</a></small>
+        </div>
+        <div class="ui divider"></div>
+        {{#if passwordsDontMatch}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Oh snap!</strong> Your new passwords do not match.
+        </div>
+        {{/if}}
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input type="password" name="newPassword" class="form-control" id="newPassword" placeholder="New Password">
+        </div>
+        <div class="form-group">
+          <label for="confirmNewPassword">Confirm New Password</label>
+          <input type="password" name="confirmPassword" class="form-control" id="confirmNewPassword" placeholder="Confirm New Password">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="ui primary button js-change-password">Change Password</button>
+        <button type="button" class="ui grey basic button js-dismiss-modal" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+</template>
