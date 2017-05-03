@@ -3,17 +3,33 @@
     <i class="user icon"></i>
     User
   </h4>
+  {{#if user.profile.name}}
   <h2>{{ user.profile.name }}</h2>
+  {{/if}}
   <h4 class="ui horizontal divider header">
     <i class="privacy icon"></i>
     Password
   </h4>
-  <button class="btn btn-primary" data-toggle="modal" data-target="#resetPasswordModal">Change Password</button>
-  <button type="button" class="btn btn-link">Reset My Forgotten Password</button>
+  <div class="card card-outline-secondary mb-3 text-center">
+    <div class="card-block">
+      <button class="btn btn-primary" data-toggle="modal" data-target="#resetPasswordModal">Change Password</button>
+      <button type="button" class="btn btn-link js-reset-password">Reset My Password</button>
+    </div>
+  </div>
   <h4 class="ui horizontal divider header">
     <i class="protect icon"></i>
     Remote Log Out
   </h4>
+  <div class="card">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-block">
+    <h4 class="card-title">Special title treatment</h4>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 
   <div class="modal fade" id="resetPasswordModal">
   <div class="modal-dialog" role="document">
@@ -24,17 +40,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="js-reset-password">
+      <form class="js-change-password-form">
       <div class="modal-body">
         {{#if changePasswordError}}
         <div class="alert alert-danger" role="alert">
-          <strong>Oh snap!</strong> {{changePasswordError}}. <button class="btn btn-link alert-link .js-reset-password">Reset my password</button>
+          <strong>Oh snap!</strong> {{changePasswordError}}. <button class="btn btn-link alert-link js-reset-password">Reset my password</button>
         </div>
         {{/if}}
         <div class="form-group">
           <label for="currentPassword">Current Password</label>
           <input type="password" name="currentPassword" class="form-control" id="currentPassword" aria-describedby="passwordHelp" placeholder="Current Password">
-          <small id="passwordHelp" class="form-text text-muted">If you've forgotten your current password, we'll <a href="#" class="js-reset-password">email you a reset link.</a></small>
+          <small id="passwordHelp" class="form-text text-muted">If you've forgotten your current password, <a href="" class="js-reset-password">you'll need to reset it.</a></small>
         </div>
         <div class="ui divider"></div>
         {{#if passwordsDontMatch}}

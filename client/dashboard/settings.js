@@ -17,7 +17,7 @@ Template.settings.helpers({
 });
 
 Template.settings.events({
-  'submit .js-change-password'(event) {
+  'submit .js-change-password-form'(event) {
     event.preventDefault();
     const target = event.target;
     const currentPassword = target.currentPassword.value;
@@ -59,9 +59,10 @@ Template.settings.events({
     Session.set('changePasswordError', null);
   },
   'click .js-reset-password'() {
-    console.log('forgot password');
     Meteor.call('sendRestPasswordEmail', function(error) {
-      Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      if (error) {
+        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      }
     });
   }
 });

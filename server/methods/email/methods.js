@@ -71,7 +71,6 @@ Meteor.methods({
     })
   },
   'sendRestPasswordEmail': function() {
-    console.log(Meteor.userId());
     Accounts.sendResetPasswordEmail(Meteor.userId());
   }
 });
