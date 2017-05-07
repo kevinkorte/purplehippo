@@ -1,19 +1,27 @@
 <template name="dashboard">
   {{> navbar}}
-  <div class="container">
-    {{#if isActivePath '/dashboard'}}
-      <div class="row justify-content-md-center align-items-center">
-        <h2 class="ui icon header">
-        <i class="hand spock icon"></i>
-        <div class="content">
-          Hello, there!
-          <div class="sub header">Your dashboard will begin to fill once you start creating appointments.</div>
-          <button class="btn btn-primary btn-lg btn-block js-create-new-event" data-toggle="modal" data-target="#addressModal">Create an Appointment</button>
+
+  <div class="container-fluid">
+    <div class="ui cards">
+      {{#each viewings}}
+      <div class="ui card">
+        <div class="image">
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{lng}}&zoom=14&size=290x160&scale=2&maptype=roadmap&markers=size:mid%7Ccolor:red%7C{{lat}},{{lng}}&key=AIzaSyDopWicZjc_ohjfNM8ol6OUDV3ut8FqKjk" alt="Map of {{address}}">
         </div>
-      </h2>
+        <div class="content">
+          <a href="http://localhost:3000/{{user}}/{{_id}}" class="header">{{address}}</a>
+          <div class="description">
+            {{getUserProfileName user}}
+          </div>
+        </div>
+        <div class="extra content">
+
+        </div>
       </div>
-    {{/if}}
+      {{/each}}
+    </div>
   </div>
+
 
   {{> Template.dynamic template=content}}
   {{> addressModal }}

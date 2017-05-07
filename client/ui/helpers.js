@@ -1,7 +1,11 @@
 Template.registerHelper( 'getUserProfileName', () => {
   let user = Meteor.users.findOne(Meteor.userId());
   if ( user ) {
-    return user.profile.name;
+    if(user.profile) {
+      return user.profile.name;
+    } else {
+      return user.emails[0].address;
+    }
   }
 });
 Template.registerHelper('canVisitAdminMenu', () => {
