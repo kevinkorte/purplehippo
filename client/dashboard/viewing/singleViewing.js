@@ -1,3 +1,5 @@
+
+
 Template.singleViewing.helpers({
   viewing: () => {
     let id = FlowRouter.getParam('id');
@@ -19,6 +21,7 @@ Template.singleViewing.helpers({
 });
 
 Template.singleViewing.onRendered(function() {
+  $('.js-example-basic-single').select2();
   GoogleMaps.ready('viewingMap', function(map) {
     let marker = new google.maps.Marker({
       position: map.options.center,

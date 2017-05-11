@@ -3,7 +3,7 @@
     <div class="flex-header">
       {{#with viewing}}
         <div class="address">
-          {{address}}
+          <i class="icon marker"></i>{{address}}
         </div>
         <div class="action-buttons">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -20,13 +20,11 @@
         <div class="ui circular labels">
           <div class="ui label">kevinkorte15@gmail.com</div>
         </div>
+        <select class="js-example-basic-single" multiple="multiple">
+  <option value="AL">Alabama</option>
+  <option value="WY">Wyoming</option>
+</select>
       </div>
-      <form class="invite-user-form">
-        <div class="floating-input invite-user">
-          <input class="invite-email" type="email" name="email">
-          <button type="submit" class="theme-purple ui button invite-button">Send Invite</button>
-        </div>
-      </form>
     </div>
   </div>
   <div class="viewing">
