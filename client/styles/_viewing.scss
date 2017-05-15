@@ -1,5 +1,5 @@
 .viewing {
-  display: flex;
+  // display: flex;
 }
 .flex-header {
   display: flex;
@@ -9,18 +9,18 @@
   display: table;
 }
 .location {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  width: 80%;
-  height: calc(100vh - 65px);
+  // display: flex;
+  // flex-wrap: wrap;
+  // align-items: stretch;
+  // width: 80%;
+  height: calc(100vh - 41px);
 }
 .address {
   width: 100%;
   font-size: 28px;
 }
 .map {
-height: calc(100% - 119px);
+height: calc(100% - 65px);
   width: 100%;
 }
 .invite-bar {
@@ -53,4 +53,39 @@ height: calc(100% - 119px);
   &:focus {
     outline: 0;
   }
+}
+
+.people{
+  width: 100%;
+  min-height: 1px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 4px;
+  margin: 20px 0;
+  padding: 10px;
+  font-size: 1.2em;
+}
+.client-divider {
+  width: 4px;
+  height: 30px;
+  background: #ccc;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+.client {
+  border: 1px dashed #ccc;
+  padding: 4px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+.visitor {
+  border: 1px solid #ccc;
+  padding: 4px;
+  border-radius: 4px;
+  margin-top: 8px;
+  background: #fff;
+
+}
+
+.viewing-sidebar {
+  background: #474654;
 }

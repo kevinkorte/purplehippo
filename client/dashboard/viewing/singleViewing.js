@@ -20,6 +20,17 @@ Template.singleViewing.helpers({
   }
 });
 
+Template.singleViewing.events({
+  'keyup .js-address'(event) {
+    let eventId = FlowRouter.getParam('id');
+    Meteor.call('updateAddress', event.target.value, eventId, function(error) {
+      if (error) {
+        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      }
+    });
+  }
+});
+
 Template.singleViewing.onRendered(function() {
   $('.js-example-basic-single').select2();
   GoogleMaps.ready('viewingMap', function(map) {

@@ -3,36 +3,42 @@
     <div class="flex-header">
       {{#with viewing}}
         <div class="address">
-          <i class="icon marker"></i>{{address}}
+          <i class="icon marker"></i><input type="text" class="js-address" value="{{address}}">
         </div>
         <div class="action-buttons">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
+  Edit
 </button>
-          <button>Add Text Follower</button>
         </div>
       {{/with}}
     </div>
 
+  </div>
+  <div class="viewing container-fluid">
+    <div class="row">
+      <div class="location col-md-9">
 
-    <div class="invite-bar">
-      <div class="invited-users">
-        <div class="ui circular labels">
-          <div class="ui label">kevinkorte15@gmail.com</div>
+        <div id="map" class="map">{{> googleMap name="viewingMap" options=viewingMapOptions }}</div>
+      </div>
+      <div class="viewing-sidebar col-md-3">
+        <div class="people">
+          <div class="client">
+            <i class="icon plus"></i>
+            Add Client
+          </div>
+          <div class="client-divider"></div>
+        <div class="visitor">
+          Kevin Korte
         </div>
-        <select class="js-example-basic-single" multiple="multiple">
-  <option value="AL">Alabama</option>
-  <option value="WY">Wyoming</option>
-</select>
+      </div>
+        <select class="js-example-basic-single" multiple="multiple" style="width: 100%">
+      <option value="AL">Alabama</option>
+      <option value="WY">Wyoming</option>
+      </select>
       </div>
     </div>
-  </div>
-  <div class="viewing">
 
-    <div class="location">
 
-      <div id="map" class="map">{{> googleMap name="viewingMap" options=viewingMapOptions }}</div>
-    </div>
 
 
 
