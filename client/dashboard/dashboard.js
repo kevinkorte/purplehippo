@@ -26,6 +26,9 @@ Template.dashboard.helpers({
     }
   }
 });
+Template.dashboard.onRendered(function() {
+  $('#unique-id').progress('increment');
+})
 
 Template.dashboard.onCreated(function() {
   let self = this;

@@ -90,6 +90,7 @@ mongo-id@1.0.6
 mrgalaxy:stripe@2.2.2
 msavin:jetsetter@2.0.0
 msavin:mongol@2.0.1
+natestrauser:select2@4.0.3
 npm-bcrypt@0.9.2
 npm-mongo@2.2.16_1
 observe-sequence@1.0.14
@@ -120,6 +121,8 @@ templating-tools@1.1.0
 themeteorchef:bert@2.1.1
 themeteorchef:jquery-validation@1.14.0
 tracker@1.1.1
+tsega:bootstrap3-datetimepicker@4.17.37_1
+twbs:bootstrap@3.3.6
 ui@1.0.12
 underscore@1.0.10
 url@1.0.11

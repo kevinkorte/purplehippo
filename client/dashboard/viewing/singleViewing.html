@@ -1,82 +1,68 @@
 <template name="singleViewing">
-  <div class="full-width-viewing-header">
-    <div class="flex-header">
-      {{#with viewing}}
-        <div class="address">
-          <i class="icon marker"></i><input type="text" class="js-address" value="{{address}}">
-        </div>
-        <div class="action-buttons">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Edit
-</button>
-        </div>
-      {{/with}}
-    </div>
-
-  </div>
+  {{#if Template.subscriptionsReady}}
   <div class="viewing container-fluid">
     <div class="row">
-      <div class="location col-md-9">
+      <div class="location col-md-6">
 
         <div id="map" class="map">{{> googleMap name="viewingMap" options=viewingMapOptions }}</div>
       </div>
-      <div class="viewing-sidebar col-md-3">
-        <div class="people">
-          <div class="client">
-            <i class="icon plus"></i>
-            Add Client
-          </div>
-          <div class="client-divider"></div>
-        <div class="visitor">
-          Kevin Korte
+      <div class="viewing-sidebar col-md-6">
+        <div class="edit-page">
+          <h4><i class="fa fa-lock" aria-hidden="true"></i> Edit <span>(only visable to you)</span></h4>
+          <a href="#" class="btn btn-success">View as User</a>
         </div>
-      </div>
-        <select class="js-example-basic-single" multiple="multiple" style="width: 100%">
-      <option value="AL">Alabama</option>
-      <option value="WY">Wyoming</option>
-      </select>
-      </div>
-    </div>
-
-
-
-
-
-  </div>
-
-
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <nav class="nav">
-  <a class="nav-link active" href="#">Add Phone</a>
-  <a class="nav-link" href="#">Add Email</a>
-</nav>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group row">
-            <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
-            <div class="col-10">
-              <input class="form-control" type="tel" placeholder="5551235555" pattern="\d{3}[\]\d{3}[\]\d{4}" id="tel-input" aria-describedby="passwordHelpBlock">
-              <p id="passwordHelpBlock" class="form-text text-muted">Enter the 10 digit phone number with no dashes or parenthesis. Ex: 5551235555
-</p>
+        {{#with viewing}}
+          <div class="wrapper-padding-15-pixels">
+            <form class="ui form huge update-address-form">
+              <div class="edit-address field">
+                <input class="edit-address-input" name="address" type="text" value="{{address}}">
+                <button class="ui basic button disabled update-address-btn" type="submit">Update Address</button>
+              </div>
+            </form>
+            <h4 class="ui horizontal divider header">
+              <i class="icon wait"></i> Time
+            </h4>
+            <div class="row">
+            <div class='col-sm-6'>
+              <label for="start-datetime"><i class="icon hourglass start"></i>Start Time</label>
+              <input id="start-datetime" type="text" class="form-control" placeholder="Start Time" aria-describedby="basic-addon1">
             </div>
+            <div class='col-sm-6'>
+              <label for="end-datetime"><i class="icon hourglass end"></i>End Time</label>
+              <input id="end-datetime" type="text" class="form-control" placeholder="End Time" aria-describedby="basic-addon1">
+            </div>
+
+
+
+      </div>
+        <h4 class="ui horizontal divider header">
+          <i class="icon user"></i>Client
+        </h4>
+        <div class="alert alert-info" role="alert">
+          <strong>Heads up!</strong> Your client's name won't be shown unless time expires.
+        </div>
+        <form class="ui form update-client-form">
+          <div class="edit-client field">
+            <input class="edit-client-input" name="client" type="text" value="{{client.name}}">
+            <button class="ui basic button disabled update-client-btn" type="submit">{{clientButton client.name}}</button>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+        </form>
+
+
+        <h4 class="ui horizontal divider header">
+          <i class="icon users"></i>Followers
+        </h4>
+        <select class="js-example-basic-single" multiple="multiple" style="width: 100%;">
+          <option value="AL">Alabama</option>
+          <option value="WY">Wyoming</option>
+        </select>
+
+
+          </div>
+        {{/with}}
       </div>
     </div>
   </div>
 
-
+{{/if}}
 </template>

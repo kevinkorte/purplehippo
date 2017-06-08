@@ -32,7 +32,7 @@ kadira:blaze-layout
 aldeed:collection2
 alanning:roles
 themeteorchef:bert
-#twbs:bootstrap
+twbs:bootstrap
 fourseven:scss
 
 meteortoys:allthings
@@ -48,3 +48,5 @@ jeremy:geocomplete
 dburles:google-maps
 mdg:geolocation
 aldeed:geocoder
+tsega:bootstrap3-datetimepicker
+natestrauser:select2

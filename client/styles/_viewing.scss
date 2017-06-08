@@ -1,12 +1,6 @@
 .viewing {
   // display: flex;
-}
-.flex-header {
-  display: flex;
-}
-.action-buttons {
-  flex-grow: 1;
-  display: table;
+  margin-top: -15px;
 }
 .location {
   // display: flex;
@@ -15,77 +9,51 @@
   // width: 80%;
   height: calc(100vh - 41px);
 }
-.address {
-  width: 100%;
-  font-size: 28px;
+.location,
+.viewing-sidebar {
+  padding-left: 0;
+  padding-right: 0;
 }
 .map {
-height: calc(100% - 65px);
+height: calc(100% - 16px);
   width: 100%;
-}
-.invite-bar {
-  width: 100%;
-  display: flex;
-  padding: 12px 6px;
-  & .ui.label {
-    margin-bottom: 0;
-  }
-}
-.invited-users {
-  flex-grow: 1;
-}
-.invite-user-form {
-  width: 400px;
-  background: #fff;
-}
-.invite-user {
-  display: flex;
-  width: 100%;
-  border: 1px solid #ccc;
-    padding: 5px 6px;
-   & input {
-     border: none;
-     flex-grow: 1;
-   }
-}
-.invite-email {
-  &:active,
-  &:focus {
-    outline: 0;
-  }
-}
-
-.people{
-  width: 100%;
-  min-height: 1px;
-  background: rgba(255,255,255,0.9);
-  border-radius: 4px;
-  margin: 20px 0;
-  padding: 10px;
-  font-size: 1.2em;
-}
-.client-divider {
-  width: 4px;
-  height: 30px;
-  background: #ccc;
-  border-radius: 4px;
-  margin: 0 auto;
-}
-.client {
-  border: 1px dashed #ccc;
-  padding: 4px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-}
-.visitor {
-  border: 1px solid #ccc;
-  padding: 4px;
-  border-radius: 4px;
-  margin-top: 8px;
-  background: #fff;
-
 }
 
 .viewing-sidebar {
-  background: #474654;
+
+}
+.edit-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #76b852;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #8DC26F, #76b852);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #8DC26F, #76b852); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: rgba(118, 184, 82, 0.6);
+  color: #65924d;
+  padding: 13px 26px;
+  h4 {
+    margin-bottom: 0;
+  }
+  span {
+    font-size: 14px;
+  }
+}
+.wrapper-padding-15-pixels {
+  padding: 0 15px;
+}
+.edit-address,
+.edit-client {
+  display: flex;
+  padding: 15px 0;
+}
+.edit-address-input,
+.edit-client-input {
+  flex-grow: 1;
+  margin-right: 20px !important; //Semantic override
+  width: auto !important; //Semantic override
+}
+.add-client-wrapper {
+  display: flex;
+  justify-content: center;
 }

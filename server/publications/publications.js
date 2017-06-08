@@ -18,3 +18,8 @@ Meteor.publish('myDashboard', function() {
   return Viewings.find({});
   // return Viewings.find({ endTime: { $exists: true }, $or: [{"followersEmail": user.emails[0].address},{author: this.userId}]}, {sort: {startTime: 1}});
 });
+
+Meteor.publish('viewing', function(id) {
+  console.log(id, 'viewing id');
+  return Viewings.find({_id: id});
+})
