@@ -43,12 +43,14 @@ height: calc(100% - 16px);
   padding: 0 15px;
 }
 .edit-address,
-.edit-client {
+.edit-client,
+.edit-followers {
   display: flex;
   padding: 15px 0;
 }
 .edit-address-input,
-.edit-client-input {
+.edit-client-input,
+.edit-followers-input {
   flex-grow: 1;
   margin-right: 20px !important; //Semantic override
   width: auto !important; //Semantic override
@@ -56,4 +58,8 @@ height: calc(100% - 16px);
 .add-client-wrapper {
   display: flex;
   justify-content: center;
+}
+.js-add-follower {
+  flex: 0 0 124px;
+  height: 38px;
 }

@@ -2,7 +2,10 @@ Template.singleViewing.onRendered(function() {
   let template = this;
   template.subscribe('viewing', FlowRouter.getParam('id'), function() {
     Tracker.afterFlush(function() {
-      $(".js-example-basic-single").select2();
+      $(".edit-followers-input").select2();
+      $('.ui.dropdown')
+  .dropdown()
+;
     })
   });
   GoogleMaps.ready('viewingMap', function(map) {
@@ -71,6 +74,31 @@ Template.singleViewing.helpers({
     } else {
       return "Add Client"
     }
+  },
+  follower(id) {
+    let allFollowers = Followers.find({}).fetch();
+    let currentViewing = Viewings.findOne(id);
+    for( var i=allFollowers.length - 1; i>=0; i--) {
+      for( var j=0; j<currentViewing.followers.length; j++) {
+        if (allFollowers[i] && (allFollowers[i]._id === currentViewing.followers[j].id)) {
+          allFollowers.splice(i, 1);
+        }
+      }
+    }
+    return allFollowers;
+  },
+  activeFollower(id) {
+    console.log(id, 'id');
+  },
+  hasEmail(email) {
+    if (email) {
+      return '<i class="icon mail"></i>';
+    }
+  },
+  hasPhone(phone) {
+    if (phone) {
+      return '<i class="icon call"></i>'
+    }
   }
 });
 
@@ -123,5 +151,28 @@ Template.singleViewing.events({
         }
       }
     });
+  },
+  'submit .add-followers'(event) {
+    event.preventDefault();
+    let followers = $('.edit-followers-input').val();
+    // followers.forEach(function(el) {console.log(el)});
+    let eventId = FlowRouter.getParam('id');
+    Meteor.call('addFollowers', followers, eventId, function(error, result) {
+      if (error) {
+        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      } else {
+
+      }
+    })
+  },
+  'click .js-delete-follower-from-viewing'(event) {
+    let eventId = FlowRouter.getParam('id');
+    Meteor.call('deleteFollowerFromViewing', eventId, this.id, function(error, result) {
+      if (error) {
+        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      } else {
+        Bert.alert( 'Follower deleted!', 'success', 'growl-top-left', 'fa-check' );
+      }
+    })
   }
 });

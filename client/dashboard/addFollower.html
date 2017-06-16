@@ -1,0 +1,119 @@
+<template name="addFollower">
+
+  <div class="card">
+  <div class="card-block">
+    <h4 class="card-title">Add New Follower</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Add one or the other, or both!</h6>
+    <form class="js-create-new-follower">
+      <div class="form-group row {{hasDanger}}">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="name" id="name" placeholder="Person's Name">
+          {{#if nameRequired}}
+            <div class="form-control-feedback">{{nameRequired}}</div>
+          {{else}}
+            <p class="form-text text-muted">A name is required</p>
+          {{/if}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="phoneNumber" class="col-sm-2 col-form-label">Phone Number</label>
+        <div class="col-sm-10">
+          <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+          <p class="form-text text-muted">Please enter a 10 digit phone number.</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="emailAddress" class="col-sm-2 col-form-label">Email Address</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" name="emailAddress" id="emailAddress" placeholder="Email">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Create New Follower</button>
+
+    </form>
+  </div>
+</div>
+<div class="card mt-3">
+  <div class="card-header">
+    Followers
+  </div>
+  {{#if Template.subscriptionsReady}}
+    <ul class="list-group list-group-flush">
+      {{#each follower}}
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="follower">
+          {{name}}
+          {{{hasPhone _id}}}
+          {{{hasEmail _id}}}
+        </div>
+        <div class="follower-action-btns">
+          <button class="editFollower ui button" data-id="{{_id}}" data-toggle="modal" data-target="#editModal">Edit</button>
+          <button class="removeFollower ui button">Delete</button>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <div class="ui active centered inline loader my-5"></div>
+  {{/if}}
+</div>
+
+
+
+
+
+<div class="modal fade" id="editModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+        <form class="js-update-new-follower">
+          <div class="form-group row {{hasDanger}}">
+            <label for="name" class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" value="{{editFollowerName}}" name="name" id="name" placeholder="Person's Name">
+              {{#if nameRequired}}
+                <div class="form-control-feedback">{{nameRequired}}</div>
+              {{else}}
+              {{/if}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="editPhoneNumber" class="col-sm-4 col-form-label">Phone Number</label>
+            <div class="col-sm-8">
+              <input type="tel" class="form-control" value="{{editFollowerPhone}}" name="editPhoneNumber" id="editPhoneNumber" placeholder="Phone Number">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="emailAddress" class="col-sm-4 col-form-label">Email Address</label>
+            <div class="col-sm-8">
+              <input type="email" class="form-control" value="{{editFollowerEmail}}" name="emailAddress" id="emailAddress" placeholder="Email">
+            </div>
+          </div>
+
+        </form>
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary close-edit-modal" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</template>

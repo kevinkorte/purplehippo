@@ -52,10 +52,32 @@
         <h4 class="ui horizontal divider header">
           <i class="icon users"></i>Followers
         </h4>
-        <select class="js-example-basic-single" multiple="multiple" style="width: 100%;">
-          <option value="AL">Alabama</option>
-          <option value="WY">Wyoming</option>
+        <form class="add-followers">
+        <select class="edit-followers-input" multiple="multiple" style="width: 100%;">
+          {{#each follower _id}}
+          <option value="{{_id}}">{{name}}</option>
+          {{/each}}
         </select>
+
+          <button class="ui basic button positive js-add-follower" type="submit">Add Follower</button>
+        </form>
+
+            <div class="ui labels">
+              {{#each followers}}
+                <div class="ui label">
+                  {{{hasEmail email}}}
+                  {{{hasPhone phoneNumber}}}
+                  {{name}}
+                  <i class="delete icon js-delete-follower-from-viewing"></i>
+                </div>
+              {{/each}}
+            </div>
+
+
+
+
+
+
 
 
           </div>
