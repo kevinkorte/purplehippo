@@ -3,10 +3,123 @@ Template.singleViewing.onRendered(function() {
   template.subscribe('viewing', FlowRouter.getParam('id'), function() {
     Tracker.afterFlush(function() {
       $(".edit-followers-input").select2();
-      $('.ui.dropdown')
-  .dropdown()
-;
-    })
+
+let eventId = FlowRouter.getParam('id');
+
+if (eventId) {
+
+
+
+
+  let loadTimes = (eventId) => {
+    return new Promise( (resolve, reject) => {
+      console.log(eventId);
+      Meteor.call('getStartTime', eventId, function(error, response) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+        } else if (response.startTime) {
+          console.log('has date new timepicker');
+          $('#start-datetime').datetimepicker({
+            defaultDate: response.startTime
+          });
+          let startTime = response.startTime;
+          Meteor.call('getEndTime', eventId, function(error, response) {
+            if (error) {
+              Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+              reject(error);
+            } else if (response.endTime) {
+              $('#end-datetime').datetimepicker({
+                defaultDate: response.endTime
+              });
+              resolve(startTime);
+            } else {
+              $('#end-datetime').datetimepicker({
+                useCurrent: false //Important! See issue #1075
+              });
+              resolve(startTime);
+            }
+          });
+        } else {
+          console.log('no date, new timepicker');
+          $('#start-datetime').datetimepicker({});
+          Meteor.call('getEndTime', eventId, function(error, response) {
+            if (error) {
+              reject(error);
+            } else if (response.endTime) {
+              console.log('response endTime');
+              $('#end-datetime').datetimepicker({
+                defaultDate: response.endTime
+              });
+              resolve(response);
+            } else {
+              console.log('else');
+              $('#end-datetime').datetimepicker({
+                useCurrent: false //Important! See issue #1075
+              });
+              resolve(response);
+            }
+          });
+        }
+      });
+    });
+  }
+  loadTimes(eventId).then((response) => {
+    let thisDate = moment(response);
+    console.log(thisDate);
+    $('#end-datetime').data('DateTimePicker').minDate(thisDate);
+    $('#start-datetime').on('dp.change', function(event) {
+      $('#end-datetime').data('DateTimePicker').minDate(event.date);
+      let updateStartDateTime = event.date._d;
+      Meteor.call('updateStartDateTime', eventId, updateStartDateTime, function(error, response) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+        } else {
+          $('.js-form-group-start-datetime').addClass('has-success');
+          $('#start-datetime').addClass('form-control-success');
+          Meteor.setTimeout(function() {
+            $('.js-form-group-start-datetime').removeClass('has-success');
+            $('#start-datetime').removeClass('form-control-success');
+          }, 2000);
+        }
+      });
+    });
+
+    $('#end-datetime').on('dp.change', function(event) {
+      let updateEndDateTime = event.date._d;
+      console.log('end date time');
+      Meteor.call('updateEndDateTime', eventId, updateEndDateTime, function(error, response) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+        } else {
+          $('.js-form-group-end-datetime').addClass('has-success');
+          $('#end-datetime').addClass('form-control-success');
+          Meteor.setTimeout(function() {
+            $('.js-form-group-end-datetime').removeClass('has-success');
+            $('#end-datetime').removeClass('form-control-success');
+          }, 2000);
+        }
+      })
+    });
+    //next on change
+  });
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+    });
   });
   GoogleMaps.ready('viewingMap', function(map) {
     let marker = new google.maps.Marker({
@@ -14,7 +127,6 @@ Template.singleViewing.onRendered(function() {
       map: map.instance,
       draggable: true,
     });
-    $('#start-datetime').datetimepicker();
     marker.addListener('dragend', function(event) {
       let id = FlowRouter.getParam('id');
       let lat = event.latLng.lat();
@@ -46,6 +158,7 @@ Template.singleViewing.onRendered(function() {
         }
       }
     });
+
   }
 });
 

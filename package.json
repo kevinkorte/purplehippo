@@ -10,7 +10,8 @@
     "jquery-mask-plugin": "^1.14.11",
     "material-shadows": "^3.0.1",
     "meteor-node-stubs": "~0.2.0",
-    "select2": "^4.0.3"
+    "select2": "^4.0.3",
+    "twilio": "^3.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1"

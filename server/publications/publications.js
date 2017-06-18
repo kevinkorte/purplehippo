@@ -22,4 +22,9 @@ Meteor.publish('myDashboard', function() {
 Meteor.publish('viewing', function(id) {
   console.log(id, 'viewing id');
   return Viewings.find({_id: id});
-})
+});
+
+Meteor.publish('events', function(id) {
+  check(id, String);
+  return Events.find({viewingId: id}, {sort: {timestamp: -1}});
+});

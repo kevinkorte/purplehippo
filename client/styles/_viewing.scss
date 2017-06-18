@@ -63,3 +63,44 @@ height: calc(100% - 16px);
   flex: 0 0 124px;
   height: 38px;
 }
+.public-viewing-sidebar {
+  background-color: #242425;
+  min-height: 100%;
+}
+.activity-header > .icon.newspaper,
+.activity-header > .content {
+  color: #b1b1b1 !important;
+}
+.viewport-height {
+  height: calc(100vh - 107px);
+}
+.activity-header {
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #404040 !important;
+}
+.progress {
+  flex-grow: 1;
+  height: 1px;
+  margin: 0 10px;
+}
+.parties {
+  border: 1px solid #404040;
+  border-radius: 4px;
+  color: #b1b1b1;
+  margin-top: 10px;
+  .user {
+    padding: 4px;
+  }
+}
+.date-of-viewing {
+  flex-grow: 1;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border-color: #404040;
+  color: #b1b1b1;
+}
+i.circular.icon {
+  box-shadow: 0em 0em 0em 0.1em rgba(64, 64, 64, 1) inset;
+}

@@ -48,5 +48,6 @@ jeremy:geocomplete
 dburles:google-maps
 mdg:geolocation
 aldeed:geocoder
-tsega:bootstrap3-datetimepicker
+#tsega:bootstrap3-datetimepicker
 natestrauser:select2
+meteorhacks:ssr
