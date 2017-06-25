@@ -2,10 +2,13 @@
   {{> navbar}}
 
   <div class="container-fluid">
+
+
+
     <div class="ui cards">
       {{#each viewings}}
-      <div class="ui card">
-        <div class="image">
+      <div class="ui card {{expired _id}}">
+        <div class="ui fluid image">
           <img src="https://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{lng}}&zoom=14&size=290x160&scale=2&maptype=roadmap&markers=size:mid%7Ccolor:red%7C{{lat}},{{lng}}&key=AIzaSyDopWicZjc_ohjfNM8ol6OUDV3ut8FqKjk" alt="Map of {{address}}">
         </div>
         <div class="content">
@@ -14,11 +17,11 @@
             {{getUserProfileName user}}
           </div>
         </div>
-
-          <div id="unique-id" class="ui bottom attached active green progress" data-value="63" data-total="90">
-    <div class="bar"></div>
-  </div>
-
+        <div class="extra content">
+          <span>
+            <i class="users icon"></i>{{getNumOfFollowers _id}}
+          </span>
+        </div>
       </div>
       {{/each}}
     </div>

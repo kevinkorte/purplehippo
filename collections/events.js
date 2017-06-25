@@ -6,12 +6,15 @@ EventsSchema = new SimpleSchema({
   },
   lat: {
     type: String,
+    optional: true
   },
   lng: {
     type: String,
+    optional: true
   },
   accuracy: {
     type: Number,
+    optional: true
   },
   timestamp: {
     type: Number,

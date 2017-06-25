@@ -41,7 +41,7 @@ if (eventId) {
           });
         } else {
           console.log('no date, new timepicker');
-          $('#start-datetime').datetimepicker({});
+          $('#start-datetime').datetimepicker({useCurrent: false});
           Meteor.call('getEndTime', eventId, function(error, response) {
             if (error) {
               reject(error);
@@ -102,23 +102,7 @@ if (eventId) {
     });
     //next on change
   });
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
     });
   });
   GoogleMaps.ready('viewingMap', function(map) {
@@ -190,15 +174,22 @@ Template.singleViewing.helpers({
   },
   follower(id) {
     let allFollowers = Followers.find({}).fetch();
+    console.log('all followers', allFollowers);
     let currentViewing = Viewings.findOne(id);
-    for( var i=allFollowers.length - 1; i>=0; i--) {
-      for( var j=0; j<currentViewing.followers.length; j++) {
-        if (allFollowers[i] && (allFollowers[i]._id === currentViewing.followers[j].id)) {
-          allFollowers.splice(i, 1);
+    if (!currentViewing.followers) {
+      return allFollowers
+    } else {
+      if (allFollowers && currentViewing.followers) {
+        for( var i=allFollowers.length - 1; i>=0; i--) {
+          for( var j=0; j<currentViewing.followers.length; j++) {
+            if (allFollowers[i] && (allFollowers[i]._id === currentViewing.followers[j].id)) {
+              allFollowers.splice(i, 1);
+            }
+          }
         }
+        return allFollowers;
       }
     }
-    return allFollowers;
   },
   activeFollower(id) {
     console.log(id, 'id');
@@ -258,6 +249,25 @@ Template.singleViewing.events({
           let viewing = Viewings.findOne(eventId);
           if (viewing) {
             Session.set('address', viewing.address);
+            $('.update-address-btn').addClass('disabled');
+            $('.update-address-btn').removeClass('positive');
+          }
+        }
+      }
+    });
+  },
+  'submit .update-client-form'(event) {
+    event.preventDefault();
+    let eventId = FlowRouter.getParam('id');
+    Meteor.call('updateClient', event.target.client.value, eventId, (error, result) => {
+      if (error) {
+        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      } else {
+        let eventId = FlowRouter.getParam('id');
+        if (eventId) {
+          let viewing = Viewings.findOne(eventId);
+          if (viewing) {
+            Session.set('clientName', viewing.client);
             $('.update-address-btn').addClass('disabled');
             $('.update-address-btn').removeClass('positive');
           }

@@ -28,3 +28,17 @@ Meteor.publish('events', function(id) {
   check(id, String);
   return Events.find({viewingId: id}, {sort: {timestamp: -1}});
 });
+
+Meteor.publish('payments', function() {
+  console.log('payments');
+  let user = Meteor.users.findOne(this.userId);
+  // console.log(user);
+  if (user) {
+    let organization = Organizations.findOne(user.organizationId);
+    // console.log(organization);
+    if (organization) {
+      console.log(Subscriptions.find({'data.object.customer': organization.customerId}).fetch());
+      return Subscriptions.find({'data.object.customer': organization.customerId});
+    }
+  }
+});

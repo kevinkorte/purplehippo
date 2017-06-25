@@ -102,6 +102,26 @@ Template.publicSingleViewing.helpers({
     let id = FlowRouter.getParam('id');
     return Viewings.findOne({_id: id});
   },
+  viewingUser(id) {
+    let viewing = Viewings.findOne(id);
+    if (viewing) {
+      return viewing.user;
+    }
+  },
+  shouldShowClient(id) {
+    let viewing = Viewings.findOne(id);
+    if (viewing) {
+      if (viewing.expired) {
+        return true
+      }
+    }
+  },
+  clientName(id) {
+    let viewing = Viewings.findOne(id);
+    if (viewing) {
+      return viewing.client;
+    }
+  },
   viewingMapOptions: function() {
     let id = FlowRouter.getParam('id');
     let viewing = Viewings.findOne({_id: id});
@@ -134,13 +154,13 @@ Template.publicSingleViewing.helpers({
   },
   ifHasStartTime: (id) => {
     let viewing = Viewings.findOne(id);
-    if (viewing) {
+    if (viewing.startTime) {
       return moment(viewing.startTime).format('h:mm A');
     }
   },
   ifHasEndTime: (id) => {
     let viewing = Viewings.findOne(id);
-    if (viewing) {
+    if (viewing.endTime) {
       return moment(viewing.endTime).format('h:mm A');
     }
   },
@@ -155,8 +175,8 @@ Template.publicSingleViewing.helpers({
       return currentDiff/viewingDiff * 100;
     }
   },
-  events() {
-    let events = Events.find({}, {sort: {timestamp: -1}});
+  events(id) {
+    let events = Events.find({viewingId: id}, {sort: {timestamp: -1}});
 
     if ( events ) {
       return events;
@@ -167,8 +187,10 @@ Template.publicSingleViewing.helpers({
     if (thisEvent) {
       if (thisEvent.eventType == 'check-in') {
         return '<i class="icon circular location arrow"></i>';
-      } else if (thisEvent.eventType == 'manual-start') {
+      } else if (thisEvent.eventType == 'manual-start' || thisEvent.eventType == 'auto-start') {
         return '<i class="icon circular flag"></i>';
+      } else if (thisEvent.eventType == 'auto-end') {
+        return '<i class="icon circular warning sign"></i>'
       }
     }
   },
@@ -179,6 +201,10 @@ Template.publicSingleViewing.helpers({
         return "Check-In"
       } else if (thisEvent.eventType == 'manual-start') {
         return "Start"
+      } else if (thisEvent.eventType == 'auto-start') {
+        return "Auto Start"
+      } else if (thisEvent.eventType == 'auto-end') {
+        return "Time Expired"
       }
     }
   },
@@ -196,20 +222,28 @@ Template.publicSingleViewing.helpers({
         return "Checked in near " + thisEvent.result[0].formattedAddress;
       } else if (thisEvent.eventType == 'manual-start') {
         return "Starting near " + thisEvent.result[0].formattedAddress;
+      } else if (thisEvent.eventType == 'auto-start') {
+        return "This job has been started automatically"
+      } else if (thisEvent.eventType == 'auto-end') {
+        return "This job has automatically expired."
       }
     }
   },
   eventLatLng(id) {
     let thisEvent = Events.findOne(id);
     if (thisEvent) {
-      return "Lat: " + thisEvent.lat + " Lng: " + thisEvent.lng;
+      if (thisEvent.lat && thisEvent.lng) {
+        return "Lat: " + thisEvent.lat + " Lng: " + thisEvent.lng;
+      }
     }
   },
   textColorClass(id) {
     let thisEvent = Events.findOne(id);
     if (thisEvent) {
-      if (thisEvent.eventType == 'manual-start') {
+      if (thisEvent.eventType == 'manual-start' || thisEvent.eventType == 'auto-start') {
         return 'text-success'
+      } else if (thisEvent.eventType == 'auto-end') {
+        return 'text-danger'
       }
     }
   },

@@ -24,6 +24,25 @@ Template.dashboard.helpers({
       return Viewings.find({});
 
     }
+  },
+  expired: function(id) {
+    let viewing = Viewings.findOne(id);
+    if (viewing) {
+      if (viewing.expired == true) {
+        return 'expired-card'
+      }
+    }
+  },
+  getNumOfFollowers(id) {
+    let viewing = Viewings.findOne(id);
+    if (viewing) {
+      if (viewing.followers) {
+        let num = Object.keys(viewing.followers).length;
+        return num;
+      } else {
+        return 0;
+      }
+    }
   }
 });
 Template.dashboard.onRendered(function() {

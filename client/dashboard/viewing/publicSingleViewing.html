@@ -6,16 +6,17 @@
         <div id="map" class="map">{{> googleMap name="viewingMap" options=viewingMapOptions }}</div>
       </div>
       <div class="col-md-3 public-viewing-sidebar">
-        <div class="parties">
-          <div class="user">Kevin Korte</div>
-        </div>
+        <ul class="list-group">
+          {{#if shouldShowClient _id}}<li class="list-group-item align-items-center">Client: {{clientName _id}}</li>{{/if}}
+          <li class="list-group-item">User: {{viewingUser _id}}</li>
+        </ul>
         <h3 class="ui header activity-header pt-1">
           <i class="newspaper icon"></i>
           <div class="content">Activity</div>
         </h3>
 
         <div class="list-group">
-          {{#each events}}
+          {{#each events _id}}
           <div class="list-group-item flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1 {{textColorClass _id}}">{{{geticon _id}}} {{eventTitle _id}}</h5>

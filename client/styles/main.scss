@@ -7,6 +7,7 @@
 @import 'helpers';
 @import 'signup';
 @import 'menus';
+@import 'homepage';
 @import 'usersList';
 @import 'text';
 @import 'dashboard';
@@ -19,7 +20,7 @@
     border-radius: 4.2px !important;
     width: 498px !important;
     left: 551px !important;
-    top: 100px !important;
+    top: 155px !important;
     z-index: 1200;
   }
 }

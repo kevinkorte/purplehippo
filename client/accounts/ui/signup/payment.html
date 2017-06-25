@@ -1,51 +1,62 @@
 <template name="payment">
-  <div class="invite-wrapper with-border full-width">
+  <div class="invite-wrapper full-width">
+    <h5 class="accounts-title">Organization Accounts</h5>
     <div class="invite-header">
-      <img src="/icons/credit.png" alt="">
-    </div>
-
-
-
-    <div class="account-status">
-      <div class="status">Status: {{{getAccountStatusLabel}}}</div>
-      <div class="status-date">{{getAccountStatusDate}}</div>
-    </div>
-
-      <h5 class="accounts-title">Organization Accounts</h5>
-
-    <div class="ui middle aligned divided selection list">
-      {{#each users}}
-      <div class="item">
-        <div class="right floated content">
-          {{#if accountManagementLink _id}}
-            {{#if isOwner _id}}
-            Owner
-            {{else}}
-              <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
-              {{#if isAdmin _id}}
-              <button class="removeAdmin ui basic button" data-id="{{_id}}">Remove Admin</button>
-              {{else}}
-              <button class="makeAdmin ui basic button" data-id="{{_id}}">Make Admin</button>
-              {{/if}}
-
-            {{/if}}
-          {{else}}
-            {{#if isOwner _id}}
-            Owner
-            {{else}}
-              <button class="revokeInvite ui basic button" data-id="{{_id}}">Revoke Invite</button>
-            {{/if}}
-          {{/if}}
-        </div>
-
-        <div class="content">
-          {{{getUserLabel _id}}}
-          {{emails.[0].address}}
-        </div>
+      <div class="d-flex">
+        {{{getAccountStatusLabel}}}
+        <div class="floated content">Next Payment: {{getAccountStatusDate}}</div>
       </div>
-      {{/each}}
+      <div>
+        {{getLast4ofCard}}
+        <img src="/icons/credit.png" alt="">
+      </div>
+    </div>
+    <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
+      <p class="mb-0"><strong>Hey There!</strong> You have no payment method currently!</p>
+      <button class="ui button yellow">Add Card</button>
+    </div>
+    <div class="payment-actions">
 
     </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Period</th>
+      <th>Invoice Created</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#with organization}}
+      {{#each getPayments}}
+      <tr>
+        <td>
+          {{#if data.object.paid}}
+            <span class="badge badge-pill badge-success">Paid</span>
+          {{/if}}
+        </td>
+        <td>{{getStartDate data.object.lines.data.[0].period.start}} <i class="fa fa-long-arrow-right"></i> {{getEndDate data.object.lines.data.[0].period.end}}</td>
+        <td>{{getPaymentDate data.object.date}}</td>
+        <td class="font-weight-bold">{{getPaymentAmount data.object.total}}</td>
+      </tr>
+      {{/each}}
+    {{/with}}
+  </tbody>
+</table>
+    <div class="ui middle aligned list">
+      <div class="item">
+        <div class="floated content">
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
 
 
 

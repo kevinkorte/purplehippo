@@ -13,6 +13,14 @@ Meteor.methods({
       Viewings.update(eventId, {$set: {address: address}});
     }
   },
+  updateClient(client, eventId) {
+    check(client, String);
+    check(eventId, String);
+    let viewing = Viewings.findOne(eventId);
+    if (viewing.user == Meteor.userId()) {
+      Viewings.update(eventId, {$set: {client: client}});
+    }
+  },
   'setAddressSession'(eventId) {
    let viewing = Viewings.findOne({_id: eventId});
    if (viewing) {
@@ -161,7 +169,6 @@ Meteor.methods({
             lat: result.lat,
             lng: result.lng
           };
-          console.log('data', data);
           viewing.followers.forEach(function(follower) {
             if (follower.phoneNumber) {
               client.messages.create({
@@ -176,5 +183,80 @@ Meteor.methods({
       });
     });
     // Events.update({result}, {filter: false, validate: false});
+  },
+  autoStartViewing(id) {
+    console.log(id);
+    Viewings.update(id, {$set: {active: true}}, {validate: false}, function(error, response) {
+      if (error) {
+        console.log(error);
+      } else {
+        Events.insert({
+          viewingId: id,
+          timestamp: new Date().getTime(),
+          eventType: 'auto-start'
+        }, function(error, response) {
+          if (error) {
+            console.log(error);
+          } else {
+            let viewing = Viewings.findOne(id);
+            if (viewing) {
+              SSR.compileTemplate('auto-start-message', Assets.getText('auto-start-text.html'));
+              let data = {
+                userName: viewing.user,
+                address: viewing.address
+              };
+              viewing.followers.forEach(function(follower) {
+                if (follower.phoneNumber) {
+                  client.messages.create({
+                    body: SSR.render('auto-start-message', data),
+                    to: '+1'+follower.phoneNumber,
+                    from: '+19417875497'
+                  })
+                  .then((message) => console.log(message.sid));
+                }
+              });
+            }
+          }
+        });
+      }
+    });
+  },
+  autoEndViewing(id) {
+    console.log(id);
+    Viewings.update(id, {$set: {expired: true, alertsSent: true}}, function(error, response) {
+      if (error) {
+        console.log(error);
+      } else {
+        Events.insert({
+          viewingId: id,
+          timestamp: new Date().getTime(),
+          eventType: 'auto-end'
+        }, function(error, response) {
+          if (error) {
+            console.log(error);
+          } else {
+            let viewing = Viewings.findOne(id);
+            if (viewing) {
+              SSR.compileTemplate('auto-end-message', Assets.getText('auto-end-text.html'));
+              let data = {
+                userName: viewing.user,
+                address: viewing.address,
+                endTime: moment(viewing.endTime).format('h:mm a')
+              };
+              viewing.followers.forEach(function(follower) {
+                if (follower.phoneNumber) {
+                  client.messages.create({
+                    body: SSR.render('auto-end-message', data),
+                    to: '+1'+follower.phoneNumber,
+                    from: '+19417875497'
+                  })
+                  .then((message) => console.log('alerts sent'));
+                }
+              });
+            }
+          }
+        });
+      }
+    });
   }
 });

@@ -6,6 +6,10 @@ ViewingSchema = new SimpleSchema({
     label: "Address",
     optional: true
   },
+  client: {
+    type: String,
+    optional: true
+  },
   lat: {
     type: String,
     optional: true
@@ -22,10 +26,24 @@ ViewingSchema = new SimpleSchema({
     type: Date,
     optional: true
   },
+  expired: {
+    type: Boolean,
+    optional: true
+  },
+  alertsSent: {
+    type: Boolean,
+    autoValue: function() {
+      if (this.isInsert) {
+        return false
+      }
+    }
+  },
   user: {
     type: String,
     autoValue: function() {
-      return this.userId
+      if (this.isInsert) {
+        return this.userId
+      }
     }
   },
   active: {
