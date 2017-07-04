@@ -2,13 +2,13 @@
   <div class="container-fluid">
     {{#with viewing}}
     <div class="row viewport-height">
-      <div class="col-md-9">
+      <div class="col-md-9 pr-0 pl-0">
         <div id="map" class="map">{{> googleMap name="viewingMap" options=viewingMapOptions }}</div>
       </div>
       <div class="col-md-3 public-viewing-sidebar">
         <ul class="list-group">
           {{#if shouldShowClient _id}}<li class="list-group-item align-items-center">Client: {{clientName _id}}</li>{{/if}}
-          <li class="list-group-item">User: {{viewingUser _id}}</li>
+          <li class="list-group-item"><i class="fa fa-user-circle-o"></i>: {{viewingUser _id}}</li>
         </ul>
         <h3 class="ui header activity-header pt-1">
           <i class="newspaper icon"></i>

@@ -8,9 +8,74 @@ background: -webkit-linear-gradient(to left, #614385 , #516395); /* Chrome 10-25
 background: linear-gradient(to left, #614385 , #516395); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+// main {
+//   margin-top: -49px;
+//   z-index: -1;
+// }
+.bg-faded.navbar-transparent {
+  background: transparent !important;
+  position: absolute;
+  margin: 0;
+  z-index: 1;
+  width: 100%;
+}
+.btn.btn-outline-secondary.btn-outline-header {
+  color: #512DA8;
+  border-color: #512DA8;
+  &:hover {
+    background: lighten(#512DA8, 20%);
+    color: lighten(#512DA8, 50%);
+    border-color: lighten(#512DA8, 50%);
+  }
+}
+
 .menu-gradient {
   background: -webkit-linear-gradient(to left, #614385 , #516395); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #614385 , #516395); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  background: #6a3093; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #6a3093, #a044ff); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #6a3093, #a044ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+    background: #9d50bb; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #9d50bb, #6e48aa); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #9d50bb, #6e48aa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+    background: #42275a; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #42275a, #734b6d); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #42275a, #734b6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    background: #6441a5; /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #6441a5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #6441a5, #2a0845); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+background: #673ab7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #673ab7, #512da8); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #673ab7, #512da8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+  background: #9d50bb; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #9d50bb, #6e48aa); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #9d50bb, #6e48aa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+background: #673ab7;
+
+background: #4776e6; /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4776e6, #8e54e9); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4776e6, #8e54e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+background: #673ab7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #673ab7, #512da8); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #673ab7, #512da8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
 }
 
 //override the UI accounts stacked menu
@@ -38,4 +103,17 @@ background: linear-gradient(to left, #614385 , #516395); /* W3C, IE 10+/ Edge, F
     background-color: #614385;
     color: #fff;
   }
+}
+
+.hero {
+  padding-bottom: 175px;
+}
+
+.highlights {
+  padding-top: 150px;
+  padding-bottom: 190px;
+}
+
+.real-time-wrapper {
+  position: relative;
 }

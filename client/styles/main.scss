@@ -1,8 +1,10 @@
 //@import "{}/node_modules/bootstrap/scss/_variables.scss";
 @import "{}/node_modules/bootstrap/scss/bootstrap.scss";
+// @import '{}/node_modules/font-awesome/scss/font-awesome.scss';
 @import '../../node_modules/material-shadows/material-shadows.scss';
 @import 'datetimepicker';
 
+@import 'fonts';
 @import 'animate';
 @import 'helpers';
 @import 'signup';

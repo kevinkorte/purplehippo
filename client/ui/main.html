@@ -1,4 +1,37 @@
 <template name="main">
+<div class="container">
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-transparent">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <div class="my-lg-0">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fa fa-support"></i> Support</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-secondary btn-outline-header" href="#" role="button">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+<main>
   <header>
     <div class="stripes">
       <span></span>
@@ -8,5 +41,71 @@
       <span></span>
     </div>
   </header>
+  <div class="container highlights">
+    <div class="row hero">
+      <div class="col-lg-6"></div>
+      <div class="col-lg-6">
+        <h1 class="display-4" style="color: #512DA8;">A Location Tracking App for Medical Professionals</h1>
+      </div>
+    </div>
+    <div class="row marketing-items">
+      <div class="col-md-4">
+        <div class="marketing-box box-seafoam">
+          <i class="fa fa-laptop fa-4x"></i>
+        </div>
+        <p class="font-weight-bold">Works on all devices</p>
+        <p>Works on all internet connected devices that have a web browser.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="marketing-box box-orange">
+          <i class="fa fa-bell-o fa-4x"></i>
+        </div>
+        <p class="font-weight-bold">Alerts are sent automatically to your peers</p>
+        <p>Schedule notifications and alerts to be sent based on a time you set, or by manually starting or ending an appoitment, or checking in.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="marketing-box box-blue">
+          <i class="fa fa-users fa-4x"></i>
+        </div>
+        <p class="font-weight-bold">You control who you send alerts to</p>
+        <p>For each appointment, you pick who you send alerts to for that appointment. You can add or remove peers at anytime.</p>
+      </div>
+    </div>
+    <div class="row marketing-items">
+      <div class="col-md-4">
+        <div class="marketing-box box-purple">
+          <i class="fa fa-umbrella fa-4x" aria-hidden="true"></i>
+        </div>
+        <p class="font-weight-bold">Your team under one umbrella</p>
+        <p>You can easily add or remove team members to your organization, under one simple billing.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="marketing-box box-pink">
+          <i class="fa fa-clock-o fa-4x"></i>
+        </div>
+        <p class="font-weight-bold">Updates in Near Real Time</p>
+        <p>No page refreshes, or delayed interval updates. Information updates live on your display in near real time</p>
+      </div>
+      <div class="col-md-4">
+        <div class="marketing-box box-yellow">
+          <i class="fa fa-tasks fa-4x"></i>
+        </div>
+        <p class="font-weight-bold">Create Unlimted Appointments</p>
+        <p>No account upgrades, no limits on the number of appointments your team can create.</p>
+      </div>
+    </div>
+  </div>
+  <div class="real-time-wrapper">
+    <div class="signup-stripes">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   {{> signup }}
+  </div>
+</main>
+<div class="footer"></div>
+
 </template>

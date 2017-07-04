@@ -25,6 +25,19 @@ Template.dashboard.helpers({
 
     }
   },
+  hasViewings() {
+    // let user = Meteor.users.findOne(Meteor.user());
+    if (Meteor.user()) {
+      let email = Meteor.user().emails[0].address;
+      // return Viewings.find({$or: [{"followersEmail": email},{author: Meteor.userId()}]}, {sort: {startTime: 1}});
+      if (Viewings.find({}).count() > 0) {
+        return true;
+      } else {
+        return false;
+      }
+
+    }
+  },
   expired: function(id) {
     let viewing = Viewings.findOne(id);
     if (viewing) {

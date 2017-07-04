@@ -41,7 +41,7 @@ juliancwirko:postcss
 less
 arillo:flow-router-helpers
 zimme:active-route
-fortawesome:fontawesome
+#fortawesome:fontawesome
 kevohagan:sweetalert
 momentjs:moment
 jeremy:geocomplete

@@ -3,18 +3,53 @@
 .signup-wrapper {
   max-width: 800px;
   margin: 0 auto;
+  padding-top: 73px;
   display: flex;
-  @include z-depth();
+  z-index: 10;
+}
+.error {
+  color: #d9534f!important;
+}
+
+.legend {
+  font-family: 'Montserrat', sans-serif;
 }
 //contains the form element
 //child of signup wrapper
 .signup-form-wrapper {
   width: 50%;
+  background: #fff;
+  padding: 12px;
+  margin-right: 12px;
+  border-radius: 4px;
+  @include z-depth();
+  z-index: 100;
 }
 //contains the signup marketing
 //child of signup-wrapper
 .signup-marketing-wrapper{
   width: 50%;
   min-height: 1px;
-  background-color: purple;
+  margin-left: 12px;
+  background-color: transparent;
+  z-index: 100;
+}
+
+.sign-up-header {
+  font-family: 'Montserrat', sans-serif;
+}
+.cost {
+  font-size: 5em;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 6px;
+  padding-top: 30px;
+}
+
+.cost-user {
+  margin-top: -10px;
+
+}
+
+.desc {
+  padding-top: 40px;
 }

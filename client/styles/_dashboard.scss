@@ -16,12 +16,15 @@
     margin-right: 12px;
     border: none;
     background: #e0e0e0;
+    border-radius: 4px;
+    padding-left: 8px;
     &:active,
     &:focus {
       outline: 0;
       border: 2px solid #bfbfbf;
       background: #fff;
       border-radius: 4px;
+      padding-left: 8px;
     }
 }
 

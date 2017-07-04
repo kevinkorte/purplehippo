@@ -1,22 +1,41 @@
 <template name="signup">
   <div class="signup-wrapper">
     <div class="signup-form-wrapper">
-
+    <legend class="text-center legend">Sign Up For Free For 30 Days</legend>
 
       <form class="signup-form">
-      <label for="name">Name</label>
-      <input type="text" name="name">
-      <label for="email">Email</label><input type="email" name="email">
-      <label for="password">Password</label><input id="password" type="password" name="password">
-      <label for="passwordVerify">Retype Password</label><input type="password" name="passwordVerify">
-      <input type="range" id="pricing" value={{numUsers}} step="1" min="1" max="50">
-      <output for="pricing" id="price">${{price}}</output>
-      <output for ="pricing" id="numUsers">{{numUsers}} Users</output>
-      <input type="hidden" value="{{numUsers}}" name="numUsers">
-      <input type="submit" value="Submit">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input class="form-control" id="name" type="text" name="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control" id="email" type="email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" id="password" type="password" name="password">
+        </div>
+        <div class="form-group">
+          <label for="passwordVerify">Retype Password</label>
+          <input class="form-control" id="passwordVerify" type="password" name="passwordVerify">
+        </div>
+        <div class="form-group row">
+          <label for="numUsers" class="col-5 col-form-label">How Many Users?</label>
+          <div class="col-4">
+            <input class="form-control form-control-lg" type="number">
+          </div>
+        </div>
+
+      <input type="submit" value="Get Started" class="ui button fluid green" tabindex="0">
       </form>
     </div>
-    <div class="signup-marketing-wrapper"></div>
+    <div class="signup-marketing-wrapper">
+      <h4 class="sign-up-header text-white">Sign Up Your Organization</h4>
+      <div class="cost text-white">$14</div>
+      <div class="cost-user text-white">per user</div>
+      <div class="desc text-white">You can sign up as just one user, or more. And you can add more user seats as you grow, so you only pay for what you need today.</div>
+    </div>
 
   </div>
 

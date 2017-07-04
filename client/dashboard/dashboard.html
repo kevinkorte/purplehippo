@@ -1,11 +1,17 @@
 <template name="dashboard">
   {{> navbar}}
 
+  {{#if Template.subscriptionsReady}}
+
   <div class="container-fluid">
 
 
 
-    <div class="ui cards">
+
+{{#if hasViewings}}
+
+{{#if viewings}}
+    <div class="ui centered cards">
       {{#each viewings}}
       <div class="ui card {{expired _id}}">
         <div class="ui fluid image">
@@ -18,15 +24,37 @@
           </div>
         </div>
         <div class="extra content">
-          <span>
+          <span class="left floated">
             <i class="users icon"></i>{{getNumOfFollowers _id}}
+          </span>
+          <span class="right floated text-success">
+            Upcoming
           </span>
         </div>
       </div>
       {{/each}}
     </div>
-  </div>
+    {{/if}}
+    {{else}}
 
+    <div class="card col-md-6 offset-md-3">
+
+  <div class="card-block">
+    <h2 class="ui center aligned icon header">
+    <i class="circular announcement icon"></i>
+    Huzza! Nothing on the radar right now
+    </h2>
+    <p class="card-text">Your dashboard will being to fill as you create new appointments, or your peers add you as a follower to their using your email address</p>
+    <button type="button" class="btn btn-primary">Primary</button>
+  </div>
+</div>
+
+
+
+{{/if}}
+
+  </div>
+{{/if}}
 
   {{> Template.dynamic template=content}}
   {{> addressModal }}

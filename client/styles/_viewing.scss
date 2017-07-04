@@ -101,6 +101,12 @@ height: calc(100% - 16px);
   border-color: #404040;
   color: #b1b1b1;
 }
-i.circular.icon {
+i.circular.viewing.icon {
   box-shadow: 0em 0em 0em 0.1em rgba(64, 64, 64, 1) inset;
+}
+i.icon.circular.flag {
+  box-shadow: 0em 0em 0em 0.1em rgb(92, 184, 92);
+}
+i.icon.circular.location.arrow {
+  box-shadow: 0em 0em 0em 0.1em rgb(177, 177, 177);
 }
