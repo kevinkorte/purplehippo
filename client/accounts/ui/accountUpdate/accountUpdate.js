@@ -10,6 +10,10 @@ Template.accountUpdate.helpers({
 });
 
 Template.accountUpdate.events({
+  'click .show-email-input'(event) {
+    $('.update-email-form').css('visibility', 'visible');
+    $('.options').css('visibility', 'hidden');
+  },
   'submit .accountUpdate'(event) {
     event.preventDefault();
     const email = event.target.email.value;

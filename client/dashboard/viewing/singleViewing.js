@@ -1,5 +1,6 @@
 Template.singleViewing.onRendered(function() {
   let template = this;
+  template.subscribe('followers');
   template.subscribe('viewing', FlowRouter.getParam('id'), function() {
     Tracker.afterFlush(function() {
       $(".edit-followers-input").select2();
@@ -106,6 +107,7 @@ if (eventId) {
     });
   });
   GoogleMaps.ready('viewingMap', function(map) {
+    console.log(map);
     let marker = new google.maps.Marker({
       position: map.options.center,
       map: map.instance,
@@ -115,11 +117,20 @@ if (eventId) {
       let id = FlowRouter.getParam('id');
       let lat = event.latLng.lat();
       let lng = event.latLng.lng();
-      Meteor.call('updateMapMarker', id, lat, lng, function(error) {
-        if (error) {
-          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
-        }
-      });
+      if (lat && lng) {
+        Meteor.call('updateMapMarker', id, lat, lng, function(error) {
+          if (error) {
+            Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+          }
+        });
+      } else {
+        console.log('meteor call update marker');
+        Meteor.call('updateMapMarker', id, 39.5, -98.35, function(error) {
+          if (error) {
+            Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+          }
+        });
+      }
     });
   });
   let eventId = FlowRouter.getParam('id');
@@ -158,11 +169,13 @@ Template.singleViewing.helpers({
     if ( GoogleMaps.loaded() && event ) {
       let eventLat = Number(event.lat);
       let eventLng = Number(event.lng);
-      return {
-        center: new google.maps.LatLng(eventLat, eventLng),
-        zoom: 17,
-        gestureHandling: 'cooperative'
-      }
+      console.log('eventlat', eventLat);
+
+        return {
+          center: new google.maps.LatLng(eventLat, eventLng),
+          zoom: 17,
+          gestureHandling: 'cooperative'
+        }
     }
   },
   clientButton: function(clientName) {

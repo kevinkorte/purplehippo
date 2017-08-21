@@ -109,19 +109,21 @@ Meteor.methods({
           throw new Meteor.Error('add-event', 'Opps, something went wrong updating your location');
         } else {
           SSR.compileTemplate('checkin-text-message', Assets.getText('checkin-text.html'));
-          let data = {
-            userName: Meteor.users.findOne(Meteor.userId())._id,
-            address: result[0].formattedAddress,
-            lat: result.lat,
-            lng: result.lng
-          };
+          let t_userId = viewing.user;
+          let t_user = Meteor.users.findOne(t_userId);
+            let data = {
+              userName: t_user.profile.name,
+              address: result[0].formattedAddress,
+              lat: result.lat,
+              lng: result.lng
+            };
           console.log('data', data);
           viewing.followers.forEach(function(follower) {
             if (follower.phoneNumber) {
               client.messages.create({
                 body: SSR.render('checkin-text-message', data),
                 to: '+1'+follower.phoneNumber,
-                from: '+19417875497'
+                from: '+15097923432'
               })
               .then((message) => console.log(message.sid));
             }
@@ -163,8 +165,10 @@ Meteor.methods({
           throw new Meteor.Error('add-event', 'Opps, something went wrong updating your location');
         } else {
           SSR.compileTemplate('manual-start-message', Assets.getText('manual-start-text.html'));
+          let t_userId = viewing.user;
+          let t_user = Meteor.users.findOne(t_userId);
           let data = {
-            userName: Meteor.users.findOne(Meteor.userId())._id,
+            userName: t_user.profile.name,
             address: result[0].formattedAddress,
             lat: result.lat,
             lng: result.lng
@@ -174,7 +178,7 @@ Meteor.methods({
               client.messages.create({
                 body: SSR.render('manual-start-message', data),
                 to: '+1'+follower.phoneNumber,
-                from: '+19417875497'
+                from: '+15097923432'
               })
               .then((message) => console.log(message.sid));
             }
@@ -201,8 +205,9 @@ Meteor.methods({
             let viewing = Viewings.findOne(id);
             if (viewing) {
               SSR.compileTemplate('auto-start-message', Assets.getText('auto-start-text.html'));
+              let t_user = Meteor.users.findOne(viewing.user);
               let data = {
-                userName: viewing.user,
+                userName: t_user.profile.name,
                 address: viewing.address
               };
               viewing.followers.forEach(function(follower) {
@@ -210,7 +215,7 @@ Meteor.methods({
                   client.messages.create({
                     body: SSR.render('auto-start-message', data),
                     to: '+1'+follower.phoneNumber,
-                    from: '+19417875497'
+                    from: '+15097923432'
                   })
                   .then((message) => console.log(message.sid));
                 }
@@ -220,6 +225,61 @@ Meteor.methods({
         });
       }
     });
+  },
+  endViewing(lat, lng, accuracy, timestamp, eventId) {
+    check(lat, Number);
+    check(lng, Number);
+    check(accuracy, Number);
+    check(timestamp, Number);
+    check(eventId, String);
+    let viewing = Viewings.findOne(eventId);
+    Viewings.update(eventId, {$set: {active: false, endTime: new Date(), completed: true}});
+    var geo = new GeoCoder({
+      // geocoderProvider: "mapquest",
+      httpAdapter: "https",
+      apiKey: Meteor.settings.private.mapsapi
+    });
+    var result = geo.reverse(lat, lng);
+    // console.log(result);
+    Events.insert({
+      viewingId: eventId,
+      lat: lat,
+      lng: lng,
+      accuracy: accuracy,
+      timestamp: timestamp,
+      eventType: 'manual-end'
+    }, function(error, response) {
+      if (error) {
+        console.log(error);
+        throw new Meteor.Error('end-event', 'Opps, something went wrong updating your location');
+      }
+      Events.update(response, {$set: {result}}, {filter: false, validate: false}, function(error,response){
+        if (error) {
+          throw new Meteor.Error('end-event', 'Opps, something went wrong updating your location');
+        } else {
+          SSR.compileTemplate('manual-end-message', Assets.getText('manual-end-text.html'));
+          let t_userId = viewing.user;
+          let t_user = Meteor.users.findOne(t_userId);
+          let data = {
+            userName: t_user.profile.name,
+            address: result[0].formattedAddress,
+            lat: result.lat,
+            lng: result.lng
+          };
+          viewing.followers.forEach(function(follower) {
+            if (follower.phoneNumber) {
+              client.messages.create({
+                body: SSR.render('manual-end-message', data),
+                to: '+1'+follower.phoneNumber,
+                from: '+15097923432'
+              })
+              .then((message) => console.log(message.sid));
+            }
+          });
+        }
+      });
+    });
+    // Events.update({result}, {filter: false, validate: false});
   },
   autoEndViewing(id) {
     console.log(id);
@@ -238,8 +298,10 @@ Meteor.methods({
             let viewing = Viewings.findOne(id);
             if (viewing) {
               SSR.compileTemplate('auto-end-message', Assets.getText('auto-end-text.html'));
+              let t_userId = viewing.user;
+              let t_user = Meteor.users.findOne(t_userId);
               let data = {
-                userName: viewing.user,
+                userName: t_user.profile.name,
                 address: viewing.address,
                 endTime: moment(viewing.endTime).format('h:mm a')
               };
@@ -248,7 +310,7 @@ Meteor.methods({
                   client.messages.create({
                     body: SSR.render('auto-end-message', data),
                     to: '+1'+follower.phoneNumber,
-                    from: '+19417875497'
+                    from: '+15097923432'
                   })
                   .then((message) => console.log('alerts sent'));
                 }

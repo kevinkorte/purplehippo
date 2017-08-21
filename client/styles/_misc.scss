@@ -1,0 +1,37 @@
+body.account-options {
+  & .content,
+  & i.icon {
+      color: #fff;
+  }
+  & .content > .sub.header {
+    color: rgba(255,255,255,0.6);
+  }
+}
+
+body.account-update {
+  & h5 {
+    color: #fff;
+  }
+  & .update-email-form {
+    visibility: hidden;
+  }
+  & .update-email {
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+    & label {
+      color: #fff;
+    }
+    & {
+      input {
+        width: 100%;
+      }
+    }
+  }
+  & .form-group {
+    width: 100%;
+  }
+  & .options {
+    margin: 0 auto;
+  }
+}

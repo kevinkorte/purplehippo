@@ -5,8 +5,8 @@
         <div class="col-lg-3">
 
           <nav class="nav nav-pills flex-column">
-            <a class="nav-link" href="#"><i class="settings icon"></i> My Settings</a>
-
+            <a class="nav-link {{isActiveRoute 'manageAccount'}}" href="{{pathFor 'manageAccount'}}"><i class="settings icon"></i> My Settings</a>
+            <a href="{{pathFor 'addFollower'}}" class="nav-link {{isActiveRoute 'addFollower'}}"><i class="add user icon"></i> Add New Follower</a>
             {{#if canVisitAdminMenu}}
             <a class="nav-link {{isActiveRoute 'manageUsers'}}" href="{{pathFor 'manageUsers'}}"><i class="users icon"></i> Manage Users</a>
             <a class="nav-link {{isActiveRoute 'managePayment'}}" href="{{pathFor 'managePayment'}}"><i class="payment icon"></i> Payment</a>
@@ -20,4 +20,6 @@
         </div>
       </div>
     </div>
+    {{> addressModal }}
+
 </template>

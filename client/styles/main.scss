@@ -8,6 +8,7 @@
 @import 'animate';
 @import 'helpers';
 @import 'signup';
+@import 'login';
 @import 'menus';
 @import 'homepage';
 @import 'usersList';
@@ -15,13 +16,15 @@
 @import 'dashboard';
 @import 'forms';
 @import 'viewing';
+@import 'misc';
+@import 'queries';
 
 
 @media (min-width: 576px) {
   .pac-container {
     border-radius: 4.2px !important;
-    width: 498px !important;
-    left: 551px !important;
+    // width: 498px !important;
+    // left: 551px !important;
     top: 155px !important;
     z-index: 1200;
   }

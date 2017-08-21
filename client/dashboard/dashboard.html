@@ -13,22 +13,37 @@
 {{#if viewings}}
     <div class="ui centered cards">
       {{#each viewings}}
-      <div class="ui card {{expired _id}}">
+      <div class="ui card {{expired _id}} {{active _id}}">
         <div class="ui fluid image">
+          {{#if isOwnerOfJob user}}
+          <div class="ui left corner violet label" style="overflow: hidden">
+            <i class="star icon"></i>
+          </div>
+          {{/if}}
           <img src="https://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{lng}}&zoom=14&size=290x160&scale=2&maptype=roadmap&markers=size:mid%7Ccolor:red%7C{{lat}},{{lng}}&key=AIzaSyDopWicZjc_ohjfNM8ol6OUDV3ut8FqKjk" alt="Map of {{address}}">
         </div>
         <div class="content">
-          <a href="http://localhost:3000/{{user}}/{{_id}}" class="header">{{address}}</a>
+          <a href="/{{user}}/{{_id}}" class="header">{{address}}</a>
           <div class="description">
-            {{getUserProfileName user}}
+            {{getUserOfViewing user}}
           </div>
         </div>
         <div class="extra content">
           <span class="left floated">
             <i class="users icon"></i>{{getNumOfFollowers _id}}
           </span>
-          <span class="right floated text-success">
-            Upcoming
+          {{#if active _id}}
+          <span class="right floated active-indicator">
+            <div class="indicator"></div>
+          </span>
+          {{/if}}
+        </div>
+        <div class="extra content">
+          <span class="left floated">
+            {{getDateAsString _id}}
+          </span>
+          <span class="right floated">
+            {{getTimeAsString _id}}
           </span>
         </div>
       </div>
@@ -45,7 +60,6 @@
     Huzza! Nothing on the radar right now
     </h2>
     <p class="card-text">Your dashboard will being to fill as you create new appointments, or your peers add you as a follower to their using your email address</p>
-    <button type="button" class="btn btn-primary">Primary</button>
   </div>
 </div>
 

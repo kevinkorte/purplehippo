@@ -62,7 +62,20 @@ Template.settings.events({
     Meteor.call('sendRestPasswordEmail', function(error) {
       if (error) {
         Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      } else {
+        Bert.alert( 'Hey, check your email for a reset link!', 'success', 'growl-top-right', 'fa-check' );
       }
     });
+  },
+  'submit .update-name'(event) {
+    event.preventDefault();
+    console.log(event.target.name.value);
+    Meteor.call('updateUsersName', event.target.name.value, function(error) {
+      if (error) {
+        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      } else {
+        Bert.alert( 'Alright! Your name is updated.', 'success', 'growl-top-right', 'fa-check' );
+      }
+    })
   }
 });

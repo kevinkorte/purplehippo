@@ -50,59 +50,66 @@ Meteor.methods({
     console.log(email);
     console.log(oldEmail);
     let user = Accounts.findUserByEmail(oldEmail);
-    if (user) {
-      console.log(user._id);
-      Accounts.addEmail(user._id, email);
-      if (oldEmail != email) {
-        Accounts.removeEmail(user._id, oldEmail);
-        let newCustomer = new Future();
-        Meteor.call('stripeCreateCustomer', Meteor.user().emails[0].address, '', function(error, stripeCustomer){
-          if (error) {
-            console.log(error);
-          } else {
-            let customerId = stripeCustomer.id;
-            let plan = 'basic_0217';
+      if (!Roles.userIsInRole(user._id, 'owner', user.organizationId)) {
+      if (user) {
+        console.log(user._id);
+        Accounts.addEmail(user._id, email);
+        if (oldEmail != email) {
+          Accounts.removeEmail(user._id, oldEmail);
+          let newCustomer = new Future();
+          Meteor.call('stripeCreateCustomer', Meteor.user().emails[0].address, '', function(error, stripeCustomer){
+            if (error) {
+              console.log(error);
+            } else {
+              let customerId = stripeCustomer.id;
+              let plan = 'basic_0217';
 
-            Meteor.call('stripeCreateSubscription', customerId, plan, '1', function(error, response) {
-              if (error) {
-                console.log(error);
-              } else {
-                try {
-                  let user = Meteor.users.findOne(Meteor.userId());
-                  Meteor.call('removeUserRolesFromOrg', user._id, user.organizationId);
-                  Meteor.call('createOrganization', user._id, response, stripeCustomer, function(error, result){
-                    if (error) {
-                      console.log(error.reason);
-                    } else {
-                      console.log('returned organization id', result);
-                      let organization = {organizationId: result, accountActive: true};
-                      Meteor.users.update(user._id, {
-                        $set: organization
-                      }, function(error, response) {
-                        if (error) {
-                          console.log(error);
-                        } else {
-                          newCustomer.return(user);
-                        }
-                      });
-                    }
-                  });
-                } catch(exception) {
-                  newCustomer.return(exception);
+              Meteor.call('stripeCreateSubscription', customerId, plan, '1', function(error, response) {
+                if (error) {
+                  console.log(error);
+                } else {
+                  try {
+                    let user = Meteor.users.findOne(Meteor.userId());
+                    Meteor.call('removeUserRolesFromOrg', user._id, user.organizationId);
+                    Meteor.call('createOrganization', user._id, response, stripeCustomer, function(error, result){
+                      if (error) {
+                        console.log(error.reason);
+                      } else {
+                        console.log('returned organization id', result);
+                        let organization = {organizationId: result, accountActive: true};
+                        Meteor.users.update(user._id, {
+                          $set: organization
+                        }, function(error, response) {
+                          if (error) {
+                            console.log(error);
+                          } else {
+                            newCustomer.return(user);
+                          }
+                        });
+                      }
+                    });
+                  } catch(exception) {
+                    newCustomer.return(exception);
+                  }
                 }
-              }
-            });
-          }
-        });
-        return newCustomer.wait();
-      } else {
-        throw new Meteor.Error('error', 'Sorry, something whent wrong');
+              });
+            }
+          });
+          return newCustomer.wait();
+        } else {
+          throw new Meteor.Error('error', 'Sorry, something whent wrong');
+        }
       }
+    } else {
+      console.log('owners can not leave organizations');
     }
   },
   removeUserRolesFromOrg: function(user, organizationId) {
       console.log('removeOrg', user, organizationId);
-      Roles.removeUsersFromRoles(user, 'user', organizationId);
+      Roles.removeUsersFromRoles(user, ['user', 'admin'], organizationId);
 
+  },
+  updateUsersName(name) {
+    Meteor.users.update({_id: Meteor.userId()}, { $set: { profile: { name: name } } } );
   }
 })

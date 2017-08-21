@@ -1,3 +1,10 @@
+Template.invite.onRendered(function() {
+  let self = this;
+  self.autorun(function() {
+    self.subscribe('organization');
+  });
+});
+
 Template.invite.helpers({
   canAddMoreUsers: function() {
     let user = Meteor.users.findOne(Meteor.userId());
@@ -23,6 +30,19 @@ Template.invite.helpers({
       let organization = Organizations.findOne(user.organizationId);
       if (organization) {
         return organization.quantity;
+      }
+    }
+  },
+  accountIsFull() {
+    let user = Meteor.users.findOne(Meteor.userId());
+    if (user) {
+      let organization = Organizations.findOne(user.organizationId);
+      if (organization) {
+        if (organization.quantityUsed == organization.quantity) {
+          return true
+        } else {
+          return false
+        }
       }
     }
   },
@@ -70,6 +90,14 @@ Template.invite.helpers({
     } else {
       return '<div class="ui horizontal label">User</div>';
     }
+  },
+  inviteUserError() {
+    let error = Session.get('inviteUserError');
+    if (error) {
+      return error;
+    } else {
+      return
+    }
   }
 });
 
@@ -80,7 +108,7 @@ Template.invite.events({
     const email = target.email.value;
     Meteor.call('inviteUser', email, function(error, result) {
       if (error) {
-        console.log(error.reason);
+        Session.set('inviteUserError', error.reason);
       } else {
         Bert.alert('Invitation Sent Successfully', 'success', 'fixed-top', 'fa-check');
       }
@@ -101,7 +129,7 @@ Template.invite.events({
     console.log(additionalSeats);
     Meteor.call('addAdditionalSeats', additionalSeats, function(error, response) {
       if (error) {
-        console.log(error.reason);
+        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o');
       } else {
         console.log(response);
       }

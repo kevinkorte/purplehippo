@@ -29,54 +29,54 @@ background: linear-gradient(to left, #614385 , #516395); /* W3C, IE 10+/ Edge, F
   }
 }
 
-.menu-gradient {
-  background: -webkit-linear-gradient(to left, #614385 , #516395); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #614385 , #516395); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  background: #6a3093; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #6a3093, #a044ff); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #6a3093, #a044ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
-    background: #9d50bb; /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #9d50bb, #6e48aa); /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #9d50bb, #6e48aa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
-    background: #42275a; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #42275a, #734b6d); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #42275a, #734b6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-    background: #6441a5; /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #6441a5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #6441a5, #2a0845); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-background: #673ab7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #673ab7, #512da8); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #673ab7, #512da8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-  background: #9d50bb; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #9d50bb, #6e48aa); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #9d50bb, #6e48aa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-background: #673ab7;
-
-background: #4776e6; /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #4776e6, #8e54e9); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #4776e6, #8e54e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-background: #673ab7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #673ab7, #512da8); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #673ab7, #512da8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-}
+// .menu-gradient {
+//   background: -webkit-linear-gradient(to left, #614385 , #516395); /* Chrome 10-25, Safari 5.1-6 */
+//   background: linear-gradient(to left, #614385 , #516395); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+//   background: #6a3093; /* fallback for old browsers */
+//     background: -webkit-linear-gradient(to left, #6a3093, #a044ff); /* Chrome 10-25, Safari 5.1-6 */
+//     background: linear-gradient(to left, #6a3093, #a044ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+//
+//
+//     background: #9d50bb; /* fallback for old browsers */
+//       background: -webkit-linear-gradient(to right, #9d50bb, #6e48aa); /* Chrome 10-25, Safari 5.1-6 */
+//       background: linear-gradient(to right, #9d50bb, #6e48aa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+//
+//
+//     background: #42275a; /* fallback for old browsers */
+//     background: -webkit-linear-gradient(to right, #42275a, #734b6d); /* Chrome 10-25, Safari 5.1-6 */
+//     background: linear-gradient(to right, #42275a, #734b6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+//
+//     background: #6441a5; /* fallback for old browsers */
+// background: -webkit-linear-gradient(to right, #6441a5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
+// background: linear-gradient(to right, #6441a5, #2a0845); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+//
+// background: #673ab7; /* fallback for old browsers */
+//   background: -webkit-linear-gradient(to right, #673ab7, #512da8); /* Chrome 10-25, Safari 5.1-6 */
+//   background: linear-gradient(to right, #673ab7, #512da8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+//
+//   background: #9d50bb; /* fallback for old browsers */
+//     background: -webkit-linear-gradient(to right, #9d50bb, #6e48aa); /* Chrome 10-25, Safari 5.1-6 */
+//     background: linear-gradient(to right, #9d50bb, #6e48aa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+// background: #673ab7;
+//
+// background: #4776e6; /* fallback for old browsers */
+// background: -webkit-linear-gradient(to right, #4776e6, #8e54e9); /* Chrome 10-25, Safari 5.1-6 */
+// background: linear-gradient(to right, #4776e6, #8e54e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+//
+// background: #673ab7; /* fallback for old browsers */
+//   background: -webkit-linear-gradient(to left, #673ab7, #512da8); /* Chrome 10-25, Safari 5.1-6 */
+//   background: linear-gradient(to left, #673ab7, #512da8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//
+//
+// }
 
 //override the UI accounts stacked menu
 .ui.secondary.vertical.pointing.menu .active.item {
@@ -89,6 +89,25 @@ background: #673ab7; /* fallback for old browsers */
 
 .navbar {
   margin-bottom: 15px;
+  background-color: #f7f3f9;
+  & a.nav-link {
+    color: #673AB7;
+  }
+}
+.fixed-body-padding {
+margin-top: 80px;
+}
+.navbar-brand {
+  color: #673AB7;
+  font-family: 'Lobster', cursive;
+}
+.navbar-toggler-icon i {
+  margin-top: 4.525px;
+  color: #673AB7;
+}
+.btn-purple {
+  background-color: #673AB7 !important;
+  color: #fff;
 }
 
 .nav-pills .nav-link {
@@ -98,9 +117,11 @@ background: #673ab7; /* fallback for old browsers */
   }
 }
 .nav-pills .nav-link.active {
-  background-color: #9475b9;
+  // background-color: #9475b9;
+  background-color: #673AB7 !important;
   &:hover {
-    background-color: #614385;
+    // background-color: #614385;
+    background-color: darken(#673AB7, 12%) !important;
     color: #fff;
   }
 }

@@ -1,11 +1,29 @@
 <template name="revokedAccess">
-  Revoked Access
+  <div class={{currentRouteName}}>
+  ...
+</div>
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <h2 class="ui icon header">
+        <i class="info circle icon"></i>
+        <div class="content">
+          Woah, we're sorry, that didn't work.
+          <div class="sub header">Check with who sent you the invite, and ask for them to try again - Or signup for your own account</div>
+        </div>
+      </h2>
+      </div>
 
-  <h3>It looks like something happend, but not to worry, we have a couple options</h3>
+    </div>
+    <div class="row">
+      <div class="col">
+        {{> signup }}
+      </div>
+    </div>
+  </div>
 
-  <p>Check with who sent you the invite, and ask for them to try again</p>
 
-  <p>Or signup for your own account</p>
+  {{> addressModal }}
 
-  {{> signup }}
+
 </template>

@@ -1,8 +1,47 @@
 <template name="publicSingleViewing">
   <div class="container-fluid">
     {{#with viewing}}
+    <div class="row">
+      <div class="card viewing-card">
+        <div class="card-block">
+          <div class="row align-items-center">
+            <div class="col-lg-3 col-sm-12 d-flex align-items-center">
+              <div>{{ifHasStartTime _id}}</div>
+              {{#if viewingIsToday _id}}
+              <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{progressPercentNow _id}}%; height: 1px;" aria-valuenow="{{progressPercentNow _id}}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              {{else}}
+              <div class="date-of-viewing">
+                <p class="h5 text-center">{{dateOfViewing _id}}</p>
+              </div>
+              {{/if}}
+              <div>{{ifHasEndTime _id}}</div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <p class="h3 text-muted text-center">{{address}}</p>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              {{#if isOwnerOfJob user}}
+              <div class="ui buttons fluid">
+                <a href="{{pathFor 'editViewing' author=user id=_id}}" class="ui button">Edit</a>
+                {{#if startOrStop _id}}
+                  <button class="js-start ui button">Start</button>
+                {{else}}
+                  <button class="js-stop ui button">Stop</button>
+                {{/if}}
+                <button class="js-check-in ui button">Check In</button>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="row viewport-height">
-      <div class="col-md-9 pr-0 pl-0">
+      <div class="col-md-9 pr-0 pl-0 map-wrapper">
         <div id="map" class="map">{{> googleMap name="viewingMap" options=viewingMapOptions }}</div>
       </div>
       <div class="col-md-3 public-viewing-sidebar">
@@ -32,44 +71,9 @@
       </div>
     </div>
 
-<div class="card fixed-bottom">
-  <div class="card-block">
-    <div class="row align-items-center">
-      <div class="col-sm-3 d-flex align-items-center">
-        <div>{{ifHasStartTime _id}}</div>
-        {{#if viewingIsToday _id}}
-        <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: {{progressPercentNow _id}}%; height: 1px;" aria-valuenow="{{progressPercentNow _id}}" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        {{else}}
-        <div class="date-of-viewing">
-          <p class="h5 text-center">{{dateOfViewing _id}}</p>
-        </div>
-        {{/if}}
-        <div>{{ifHasEndTime _id}}</div>
-      </div>
-      <div class="col-sm-6">
-        <p class="h3 text-muted text-center">{{address}}</p>
-      </div>
-      <div class="col-sm-3">
-        <!-- <div class="btn-group" role="group" aria-label="Basic example">
-          <a href="{{pathFor 'editViewing' author=user id=_id}}" role="button" class="btn btn-secondary">Edit</a>
-          <button type="button" class="btn btn-success">Start</button>
-          <button type="button" class="js-check-in btn btn-info">Check In</button>
-        </div> -->
-        <div class="ui buttons fluid">
-          <a href="{{pathFor 'editViewing' author=user id=_id}}" class="ui button">Edit</a>
-          {{#if startOrStop _id}}
-            <button class="js-start ui button">Start</button>
-          {{else}}
-            <button class="js-stop ui button">Stop</button>
-          {{/if}}
-          <button class="js-check-in ui button">Check In</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 {{/with}}
   </div>
+  {{> addressModal }}
+
 </template>

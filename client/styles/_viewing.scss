@@ -14,12 +14,21 @@
   padding-left: 0;
   padding-right: 0;
 }
+body.viewing {
+  margin-top: 50px;
+}
 .map {
 height: calc(100% - 16px);
   width: 100%;
 }
+.map-wrapper {
+  height: calc(100vh - 151px);
+}
+.viewing-card {
+  width: 100%;
+}
 
-.viewing-sidebar {
+.public-viewing-sidebar {
 
 }
 .edit-page {
@@ -73,6 +82,7 @@ height: calc(100% - 16px);
 }
 .viewport-height {
   height: calc(100vh - 107px);
+
 }
 .activity-header {
   padding: 10px 0 !important;

@@ -6,32 +6,37 @@ const Stripe = StripeAPI(secret);
 Meteor.methods({
   inviteUser: function(email) {
     check(email, String);
-    let user = Meteor.users.findOne(Meteor.userId());
-    if (user) {
-      let organization = Organizations.findOne(user.organizationId);
-      if (organization.quantityUsed < organization.quantity) {
-        Organizations.update(organization._id, {$inc: {quantityUsed: 1}}, function(error, result) {
-          if (error) {
-            console.log(error.reason);
-          } else {
-            let newUser = Accounts.createUser({email: email});
-            Roles.addUsersToRoles(newUser, ['user'], organization._id);
-            Meteor.users.update(newUser, {
-              $set: {
-                organizationId: organization._id,
-                accountActive: true,
-                loginCount: 0
-              }
-            }, function(error, response) {
-              if (error) {
-                console.log(error);
-              } else {
-                console.log('sending enrollment email');
-                Accounts.sendEnrollmentEmail(newUser);
-              }
-            });
-          }
-        });
+    let proposedUser = Accounts.findUserByEmail(email);
+    if (proposedUser) {
+      throw new Meteor.Error('email-exists', "This email address already exists for another organization");
+    } else {
+      let user = Meteor.users.findOne(Meteor.userId());
+      if (user) {
+        let organization = Organizations.findOne(user.organizationId);
+        if (organization.quantityUsed < organization.quantity) {
+          Organizations.update(organization._id, {$inc: {quantityUsed: 1}}, function(error, result) {
+            if (error) {
+              console.log(error.reason);
+            } else {
+              let newUser = Accounts.createUser({email: email});
+              Roles.addUsersToRoles(newUser, ['user'], organization._id);
+              Meteor.users.update(newUser, {
+                $set: {
+                  organizationId: organization._id,
+                  accountActive: true,
+                  loginCount: 0
+                }
+              }, function(error, response) {
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('sending enrollment email');
+                  Accounts.sendEnrollmentEmail(newUser);
+                }
+              });
+            }
+          });
+        }
       }
     }
   },
@@ -42,22 +47,27 @@ Meteor.methods({
     let user = Meteor.users.findOne(Meteor.userId());
     if (user) {
       let organization = Organizations.findOne(user.organizationId);
-      if (organization) {
-        Stripe.customers.updateSubscription(
-          organization.customerId,
-          { plan: organization.subscription.plan.planid,
-            quantity: organization.quantity + numOfNewSeats
-          },
-          Meteor.bindEnvironment(function(error, response) {
-            if (error) {
-              seats.return(error);
-            } else {
-              Organizations.update(organization._id, {$inc: {quantity: numOfNewSeats}});
-              seats.return(response);
+      if (numOfNewSeats >= organization.quantityUsed) {
+        if (organization) {
+          Stripe.customers.updateSubscription(
+            organization.customerId,
+            { plan: organization.subscription.plan.planid,
+              quantity: numOfNewSeats//organization.quantity + numOfNewSeats
+            },
+            Meteor.bindEnvironment(function(error, response) {
+              if (error) {
+                seats.return(error);
+              } else {
+                Organizations.update(organization._id, {$set: {quantity: numOfNewSeats}}); //set was inc
+                seats.return(response);
+              }
             }
-          }
-        ));
-        return seats.wait();
+          ));
+          return seats.wait();
+        }
+      } else {
+        //throw error that new number of seats is less then exiting number of seats
+        throw new Meteor.Error('too-few-seats', "You need more seats than currently selected")
       }
     }
   },

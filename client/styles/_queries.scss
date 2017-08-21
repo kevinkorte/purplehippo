@@ -1,0 +1,52 @@
+@media (max-width: 1199px) {
+  .accounts-title button {
+    position: relative;
+  }
+}
+@media (max-width: 767px) {
+  .map-wrapper {
+    height: 500px;
+  }
+  .public-viewing-sidebar {
+    padding-bottom: 130px;
+  }
+}
+@media (min-width: 767px) {
+  .map-wrapper {
+    position: fixed;
+  }
+  .public-viewing-sidebar {
+    position: absolute;
+    right: 0;
+  }
+  .viewing-card {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1029;
+    margin-top: 47px;
+    margin-bottom: 73px;
+  }
+  .viewport-height {
+    margin-top: 73px;
+  }
+}
+@media (max-width: 991px) {
+  .map-wrapper {
+    height: calc(100vh - 114px);
+  }
+}
+@media (min-width: 992px) {
+  .map-wrapper {
+      height: calc(100vh - 114px);
+  }
+  .public-viewing-sidebar {
+    padding-top: 20px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .public-viewing-sidebar {
+    padding-top: 80px;
+  }
+}

@@ -50,6 +50,10 @@ ViewingSchema = new SimpleSchema({
     type: Boolean,
     defaultValue: false
   },
+  completed: {
+    type: Boolean,
+    optional: true
+  },
   activeAt: {
     type: Date,
     optional: true

@@ -3,6 +3,7 @@ Template.publicSingleViewing.onCreated(function() {
   self.autorun(function() {
       var id = FlowRouter.getParam('id');
       self.subscribe('events', id);
+      self.subscribe('viewing', id);
   });
 });
 
@@ -94,6 +95,30 @@ Template.publicSingleViewing.events({
     } else {
       console.log('no geo');
     }
+  },
+  'click .js-stop'(event) {
+    console.log(event);
+    $('.js-stop').addClass('loading');
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+        let accuracy = position.coords.accuracy;
+        let timestamp = position.timestamp;
+        let id = FlowRouter.getParam('id');
+        Meteor.call('endViewing', lat, lng, accuracy, timestamp, id, function(error, response) {
+          if ( error && error.error === "end-event" ) {
+            Bert.alert( error.reason, "warning" );
+            $('.js-stop').removeClass('loading');
+          } else {
+            console.log('success');
+            $('.js-stop').removeClass('loading');
+          }
+        });
+      });
+    } else {
+      console.log('no geo');
+    }
   }
 });
 
@@ -105,7 +130,10 @@ Template.publicSingleViewing.helpers({
   viewingUser(id) {
     let viewing = Viewings.findOne(id);
     if (viewing) {
-      return viewing.user;
+      let user = Meteor.users.findOne(viewing.user);
+      if (user) {
+        return user.profile.name;
+      }
     }
   },
   shouldShowClient(id) {
@@ -128,10 +156,18 @@ Template.publicSingleViewing.helpers({
     if ( GoogleMaps.loaded() && viewing ) {
       let eventLat = Number(viewing.lat);
       let eventLng = Number(viewing.lng);
-      return {
-        center: new google.maps.LatLng(eventLat, eventLng),
-        zoom: 17,
-        gestureHandling: 'cooperative'
+      if (eventLat == 39.5 && eventLng == -98.35) {
+        return {
+          center: new google.maps.LatLng(eventLat, eventLng),
+          zoom: 5,
+          gestureHandling: 'cooperative'
+        }
+      } else {
+        return {
+          center: new google.maps.LatLng(eventLat, eventLng),
+          zoom: 17,
+          gestureHandling: 'cooperative'
+        }
       }
     }
   },
@@ -191,6 +227,8 @@ Template.publicSingleViewing.helpers({
         return '<i class="icon circular flag"></i>';
       } else if (thisEvent.eventType == 'auto-end') {
         return '<i class="icon circular warning sign"></i>'
+      } else if (thisEvent.eventType == 'manual-end') {
+        return '<i class="icon circular flag checkered"></i>'
       }
     }
   },
@@ -205,6 +243,8 @@ Template.publicSingleViewing.helpers({
         return "Auto Start"
       } else if (thisEvent.eventType == 'auto-end') {
         return "Time Expired"
+      } else if (thisEvent.eventType == 'manual-end') {
+        return "Ended"
       }
     }
   },
@@ -226,6 +266,8 @@ Template.publicSingleViewing.helpers({
         return "This job has been started automatically"
       } else if (thisEvent.eventType == 'auto-end') {
         return "This job has automatically expired."
+      } else if (thisEvent.eventType == 'manual-end') {
+        return "Ended near " + thisEvent.result[0].formattedAddress;
       }
     }
   },

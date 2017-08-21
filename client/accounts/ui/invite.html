@@ -2,28 +2,27 @@
 
 
   <div class="container">
-    <div class="row">
-      <div class="col-lg-3">
 
-        <nav class="nav nav-pills flex-column">
-          <a class="nav-link" href="#"><i class="settings icon"></i> My Settings</a>
-
-          {{#if canVisitAdminMenu}}
-          <a class="nav-link {{isActiveRoute 'manageUsers'}}" href="{{pathFor 'manageUsers'}}"><i class="users icon"></i> Manage Users</a>
-          <a class="nav-link {{isActiveRoute 'manage'}}" href="{{pathFor 'managePayment'}}"><i class="payment icon"></i> Payment</a>
-          {{/if}}
-
-        </nav>
-
-      </div>
-      <div class="col-lg-9">
 
         <div class="invite-wrapper with-border full-width">
           <div class="invite-header">
-            <form class="send-invite inviteUser">
-              <input class="floating-input" type="email" name="email">
-              <button type="submit" class="theme-purple ui button invite-button">Send Invite</button>
-            </form>
+            {{#if accountIsFull}}
+            <div class="account-full">
+              <button class="ui button green" data-toggle="modal" data-target="#seats-modal">
+                Add/Remove Number of Seats
+              </button>
+            </div>
+            {{else}}
+              <form class="send-invite inviteUser">
+                <input class="floating-input" type="email" name="email">
+                <button type="submit" class="theme-purple ui button invite-button">Send Invite</button>
+              </form>
+              {{#if inviteUserError}}
+              <div class="text-danger invite-user-error">
+                {{inviteUserError}}
+              </div>
+              {{/if}}
+            {{/if}}
             <div class="invite-account-stats">
               <div class="account-stats-numbers">
                 {{numUsers}} / {{maxUsers}}
@@ -35,28 +34,13 @@
           </div>
 
 
-
-          <div class="ui secondary pointing menu">
-  <a class="active item">
-    Active Users
-  </a>
-  <a class="item">
-    Removed Users
-  </a>
-  <a class="item">
-    Admins
-  </a>
-</div>
-<div class="ui segment">
-  <p></p>
-</div>
-
-            <h5 class="accounts-title">Organization Accounts</h5>
+            <h5 class="accounts-title">Organization Accounts <button type="button" class="btn btn-link update-accounts-btn" data-toggle="modal" data-target="#seats-modal">Add/Remove Number of Accounts</button></h5>
 
           <div class="ui middle aligned divided selection list">
             {{#each users}}
             <div class="item">
-              <div class="right floated content">
+
+              <div class="right floated content hidden-sm-down">
                 {{#if accountManagementLink _id}}
                   {{#if isOwner _id}}
                   Owner
@@ -78,10 +62,44 @@
                 {{/if}}
               </div>
 
+
+
               <div class="content">
                 {{{getUserLabel _id}}}
                 {{emails.[0].address}}
+                <div class="content-options hidden-md-up pt-2">
+                  {{#if accountManagementLink _id}}
+                    {{#if isOwner _id}}
+                    Owner
+                    {{else}}
+                      <button class="removeAccount ui basic button" data-id="{{_id}}">Remove Account</button>
+                      {{#if isAdmin _id}}
+                      <button class="removeAdmin ui basic button" data-id="{{_id}}">Remove Admin</button>
+                      {{else}}
+                      <button class="makeAdmin ui basic button" data-id="{{_id}}">Make Admin</button>
+                      {{/if}}
+
+                    {{/if}}
+                  {{else}}
+                    {{#if isOwner _id}}
+                    Owner
+                    {{else}}
+                      <button class="revokeInvite ui basic button" data-id="{{_id}}">Revoke Invite</button>
+                    {{/if}}
+                  {{/if}}
+                </div>
+
+
+
+
+
               </div>
+
+
+
+
+
+
             </div>
             {{/each}}
 
@@ -93,53 +111,42 @@
 </div>
 
       </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-  Used: {{numUsers}} / {{maxUsers}}
-{{#if canAddMoreUsers}}
-  <form class="inviteUser">
-    <input type="text" name="email">
-    <button type="submit">Send Invite</button>
-  </form>
-{{else}}
-  <form class="newSeats">
-    <button class="add-more-users" data-text="Create Additional Seats">Add More Users</button>
-  </form>
-{{/if}}
-
-<ul>
-  {{#each users}}
-    <li>
-      {{profile.name}} - {{emails.[0].address}}
-      {{#if accountManagementLink _id}}
-        {{#if isMe _id}}
-          Owner
-        {{else}}
-          <button class="removeAccount" data-id="{{_id}}">Remove Account</button>
-        {{/if}}
-      {{else}}
-        {{#if isMe _id}}
-          Owner
-        {{else}}
-          <button class="revokeInvite" data-id="{{_id}}">Revoke Invite</button>
-        {{/if}}
-      {{/if}}
-    </li>
-  {{/each}}
-</ul>
 
 
 <div id="modal" class="ui modal">
   <div class="header">Header</div>
   <div class="content">
   </div>
+</div>
+
+<div class="modal fade" id="seats-modal" tabindex="-1" role="dialog">
+  <form class="newSeats">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add/Update Number of Seats</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <div class="form-group">
+              <label for="numOfUsers">Add/Remove the number of seats needed</label>
+              <input type="number" class="form-control form-control-lg" name="additionalSeats" id="numOfUsers" min="{{numUsers}}" value="{{numUsers}}">
+              <small id="numOfUsers" class="form-text text-muted">Number can't be less then the number of users on your account. Number is for total number of seats needed.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-purple">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </form>
 </div>
 
 </template>

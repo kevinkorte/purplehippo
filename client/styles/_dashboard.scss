@@ -32,6 +32,44 @@
   //changes the color for the Semantic UI card to red instead of gray
   box-shadow: 0px 1px 3px 0px #d9534f, 0px 0px 0px 1px #d9534f !important;
 }
+.active-card {
+  //changes the color for the Semantic UI card to green instead of gray
+  box-shadow: 0px 1px 3px 0px #73ce46, 0px 0px 0px 1px #73ce46 !important;
+}
+.active-indicator {
+  width: 70%;
+  height: 5px;
+  background: rgba(64, 243, 65, 0.27);
+  border-radius: 2.5px;
+  position: relative;
+  margin-top: 8.5px;
+  & .indicator {
+    width: 20px;
+    height: 5px;
+    background: #73e469;
+    border-radius: 2.5px;
+    position: absolute;
+    animation-duration: 3s;
+    animation-name: slide;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+}
+@keyframes slide {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: calc(100% - 20px);
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.addon-card-img {
+  height: 30px;
+}
 
 // .ui.cards > .card, .ui.card {
 //   box-shadow: none; //Overrides semantic ui styles

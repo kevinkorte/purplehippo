@@ -60,6 +60,12 @@
   text-align: center;
   color: #86838a;
   padding: 8px 0;
+  position: relative;
+
+  & button {
+    position: absolute;
+    right: 0;
+  }
 }
 .account-info {
   flex-grow: 1;

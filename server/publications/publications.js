@@ -1,7 +1,7 @@
 Meteor.publish('this.user', function() {
   return Meteor.users.find({_id: this.userId}, {fields: {
     organizationId: 1,
-    subscription: 1
+    Payment: 1
   }});
 });
 
@@ -11,6 +11,12 @@ Meteor.publish('organizationUsers', function() {
     return Meteor.users.find({organizationId: user.organizationId});
   }
 });
+Meteor.publish('organization', function() {
+  let user = Meteor.users.findOne(this.userId);
+  if (user) {
+    return Organizations.find({'_id': user.organizationId});
+  }
+})
 
 Meteor.publish('myDashboard', function() {
   var user = Meteor.users.findOne(this.userId);
@@ -37,8 +43,24 @@ Meteor.publish('payments', function() {
     let organization = Organizations.findOne(user.organizationId);
     // console.log(organization);
     if (organization) {
-      console.log(Subscriptions.find({'data.object.customer': organization.customerId}).fetch());
-      return Subscriptions.find({'data.object.customer': organization.customerId});
+      console.log(Payments.find({'data.object.customer': organization.customerId}).fetch());
+      return Payments.find({'data.object.customer': organization.customerId});
     }
   }
 });
+Meteor.publish('sources', function() {
+  let user = Meteor.users.findOne(this.userId);
+  if (user) {
+    let organization = Organizations.findOne(user.organizationId);
+    if (organization) {
+      return Sources.find({'data.object.customer': organization.customerId});
+    }
+  }
+});
+
+Meteor.publish('followers', function() {
+  let user = Meteor.users.findOne(this.userId);
+  if (user) {
+    return Followers.find({'belongs_to': user._id});
+  }
+})

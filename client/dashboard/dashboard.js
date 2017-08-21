@@ -20,8 +20,8 @@ Template.dashboard.helpers({
     // let user = Meteor.users.findOne(Meteor.user());
     if (Meteor.user()) {
       let email = Meteor.user().emails[0].address;
-      // return Viewings.find({$or: [{"followersEmail": email},{author: Meteor.userId()}]}, {sort: {startTime: 1}});
-      return Viewings.find({});
+      return Viewings.find({completed: { $ne: true}, $or: [{"followers.email": email},{user: Meteor.userId()}]}, {sort: {startTime: 1}});
+      // return Viewings.find({});
 
     }
   },
@@ -46,6 +46,14 @@ Template.dashboard.helpers({
       }
     }
   },
+  active: function(id) {
+    let viewing = Viewings.findOne(id);
+    if (viewing) {
+      if (viewing.active == true) {
+        return 'active-card'
+      }
+    }
+  },
   getNumOfFollowers(id) {
     let viewing = Viewings.findOne(id);
     if (viewing) {
@@ -56,7 +64,45 @@ Template.dashboard.helpers({
         return 0;
       }
     }
-  }
+  },
+  getDateAsString(id) {
+    let viewing = Viewings.findOne(id);
+    if (viewing) {
+      if (viewing.startTime) {
+        return moment(viewing.startTime).format("ddd, MMM Do YYYY");
+      } else {
+        return;
+      }
+    } else {
+      return;
+    }
+  },
+  getTimeAsString(id) {
+    let viewing = Viewings.findOne(id);
+    if (viewing) {
+      if (viewing.startTime && viewing.endTime) {
+        let start = moment(viewing.startTime).format("h:mma");
+        let end = moment(viewing.endTime).format("h:mma");
+        return start + " - " + end;
+      } else {
+        return;
+      }
+    } else {
+      return;
+    }
+  },
+  getUserOfViewing(id) {
+    let user = Meteor.users.findOne(id);
+    if ( user ) {
+      if (user.profile) {
+        if (user.profile.name) {
+          return user.profile.name;
+        }
+      } else {
+        return user.emails[0].address;
+      }
+    }
+  },
 });
 Template.dashboard.onRendered(function() {
   $('#unique-id').progress('increment');

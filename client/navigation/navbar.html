@@ -1,24 +1,23 @@
 <template name="navbar">
-  <nav class="navbar navbar-toggleable-md navbar-inverse menu-gradient {{isActiveRoute class='mb-0' regex='publicViewings|editViewing'}}">
+  <nav class="navbar navbar-toggleable-md navbar-theme-light menu-gradient {{isActiveRoute class='mb-0 fixed-top' regex='publicViewings|editViewing'}}">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
   </button>
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">SafeTap</a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item {{isActiveRoute 'dashboard'}}">
         <a class="nav-link" href="{{pathFor 'dashboard'}}">Dashboard</a>
       </li>
+      {{#if isActiveRoute regex='dashboard'}}
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <button class="ui labeled icon button secondary btn-purple" data-toggle="modal" data-target="#addressModal">
+          <i class="plus icon"></i>
+          Create New Job
+        </button>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addressModal">New</button>
-      </li>
+      {{/if}}
     </ul>
 
     <ul class="navbar-nav">
@@ -26,12 +25,14 @@
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{getUserProfileName}}</a>
         <div class="dropdown-menu dropdown-menu-right">
           <a href="{{pathFor 'manageAccount'}}" class="dropdown-item"><i class="settings icon"></i> Account Settings</a>
-          <a href="{{pathFor 'addFollower'}}" class="dropdown-item">Add Follower</a>
+          <a href="{{pathFor 'addFollower'}}" class="dropdown-item"><i class="add user icon"></i>Add New Follower</a>
+          {{#if canVisitAdminMenu}}
           <h6 class="dropdown-header">Admin Options</h6>
           <a href="{{pathFor 'manageUsers'}}" class="dropdown-item"><i class="users icon"></i> Manage Users</a>
           <a href="{{pathFor 'managePayment'}}" class="dropdown-item"><i class="payment icon"></i> Manage Payment</a>
+          {{/if}}
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#"><i class="sign out icon"></i> Logout</a>
+          <a class="dropdown-item logout" href="#"><i class="sign out icon"></i> Logout</a>
         </div>
       </li>
     </ul>

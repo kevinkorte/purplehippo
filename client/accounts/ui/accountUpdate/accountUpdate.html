@@ -1,8 +1,37 @@
 <template name="accountUpdate">
-  {{errorMessage}}
-  Your account has been removed from the organization. Would you like to update your email address {{email}}?
-  <form class="accountUpdate">
-    <input type="email" name="email">
-    <button value="submit">Update Email</button>
-  </form>
+  <div class="container pt-4">
+    <div class="row">
+      <div class="col">{{errorMessage}}</div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h5>
+          Your account has been removed from the organization. Would you like to update your email address {{email}}?
+        </h5>
+      </div>
+    </div>
+    <div class="row py-2 update-email-form">
+      <form class="update-email form-inline accountUpdate">
+        <div class="form-group mx-lg-9">
+          <label for="updated-email" class="col-3 col-form-label">Updated Email</label>
+          <input class="form-control col-5 mr-2" type="email" name="email" placeholder="New Email" id="updated-email">
+          <button class="ui right labeled icon button green">
+            <i class="right arrow icon"></i>
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+      <div class="options">
+        <button class="ui button show-email-input">Yes</button>
+        <button class="ui right labeled icon button green">
+          <i class="right arrow icon"></i>
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+  {{> addressModal }}
+
 </template>

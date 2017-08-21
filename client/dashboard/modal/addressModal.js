@@ -15,16 +15,33 @@ Template.addressModal.events({
   'submit .address-form'(event) {
     event.preventDefault();
     let address = event.target[0].value;
-    let lat = event.target[1].value;
-    let lng = event.target[2].value;
-    Meteor.call('addNewViewing', address, lat, lng, function(error, response) {
-      if (error) {
-        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o');
-      } else if (response) {
-        $('.modal-backdrop').remove();
-        $('#addressModal').modal('hide');
-        FlowRouter.go('/'+Meteor.userId()+'/'+response);
-      }
-    });
+    if (event.target[1].value && event.target[2].value) {
+      let lat = event.target[1].value;
+      let lng = event.target[2].value;
+      Meteor.call('addNewViewing', address, lat, lng, function(error, response) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o');
+        } else if (response) {
+          $('.modal-backdrop').remove();
+          $('#addressModal').modal('hide');
+          FlowRouter.go('/'+Meteor.userId()+'/'+response);
+        }
+      });
+    } else {
+      let latNum = 39.5;
+      let lngNum = -98.35;
+      let lat = latNum.toString();
+      let lng = lngNum.toString();
+      Meteor.call('addNewViewing', address, lat, lng, function(error, response) {
+        if (error) {
+          Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o');
+        } else if (response) {
+          $('.modal-backdrop').remove();
+          $('#addressModal').modal('hide');
+          FlowRouter.go('/'+Meteor.userId()+'/'+response);
+        }
+      });
+    }
+
   }
 });

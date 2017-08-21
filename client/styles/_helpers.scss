@@ -10,3 +10,17 @@ $purple: #614385;
 .text-blue {
   color: #516395;
 }
+
+.vh-100 {
+  height: 100vh;
+}
+
+body.account-options,
+body.account-update,
+body.set-password {
+
+  background: #673ab7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #673ab7, #512da8); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #673ab7, #512da8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}

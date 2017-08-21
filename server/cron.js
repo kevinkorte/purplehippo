@@ -1,6 +1,6 @@
 Meteor.startup(function() {
 
-  // SyncedCron.start();
+  SyncedCron.start();
 
 });
 

@@ -1,6 +1,6 @@
-Subscriptions = new Mongo.Collection("subscriptions");
+Payments = new Mongo.Collection("Payments");
 
-SubscriptionSchema = new SimpleSchema({
+PaymentSchema = new SimpleSchema({
   createdAt: {
     type: Date,
     autoValue: function() {
@@ -15,4 +15,4 @@ SubscriptionSchema = new SimpleSchema({
   }
 });
 
-Subscriptions.attachSchema( SubscriptionSchema );
+Payments.attachSchema( PaymentSchema );

@@ -1,20 +1,35 @@
 <template name="payment">
   <div class="invite-wrapper full-width">
-    <h5 class="accounts-title">Organization Accounts</h5>
+    <h5 class="accounts-title">Account Billing</h5>
     <div class="invite-header">
       <div class="d-flex">
         {{{getAccountStatusLabel}}}
-        <div class="floated content">Next Payment: {{getAccountStatusDate}}</div>
+        <div class="floated content pl-3">Next Payment: {{getAccountStatusDate}}</div>
       </div>
       <div>
-        {{getLast4ofCard}}
-        <img src="/icons/credit.png" alt="">
+        {{#with organization}}
+        Last Four: <strong>{{getLast4ofCard customerId}}</strong>
+
+        <!-- <img src="/icons/credit.png" alt=""> -->
+        <img src="{{creditCardIcon customerId}}" alt="">
+        {{/with}}
       </div>
     </div>
+    {{#with organization}}
+    {{#if hasSource customerId}}
+      <button class="ui button green my-2" data-toggle="modal" data-target="#payment-modal">Update Card</button>
+    {{else}}
     <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
       <p class="mb-0"><strong>Hey There!</strong> You have no payment method currently!</p>
-      <button class="ui button yellow">Add Card</button>
+      <button class="ui button yellow" data-toggle="modal" data-target="#payment-modal">Add Card</button>
     </div>
+    {{/if}}
+    {{/with}}
+
+
+
+
+
     <div class="payment-actions">
 
     </div>
@@ -53,13 +68,77 @@
 
       </div>
     </div>
-
-
-
-
-
-
-
-
 </div>
+
+
+
+<!-- <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="payment-modal" aria-hidden="true">
+  <form class="js-add-card">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Card</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="card-number">Card Number</label>
+              <div class="input-group">
+                <span class="input-group-addon card-addon" id="basic-addon1">{{{whichCard}}}</span>
+                <input type="tel" class="form-control" id="card-number" name="cc_number" placeholder="Card Number" autocomplete="cc-number">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="expiry">Month / Year</label>
+                  <input type="tel" class="form-control" id="expiry" name="cc_expiry" placeholder="MM / YYYY" autocomplete="cc-exp">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="cvc">CVC</label>
+                  <input type="tel" class="form-control" id="cvc" name="cc_cvc" placeholder="CVC" autocomplete="off">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add Card</button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div> -->
+
+<div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="payment-modal" aria-hidden="true">
+  <form class="js-add-card" id="payment-form">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Card</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+
+          </div>
+          <!-- Used to display Element errors -->
+    <div id="card-errors" class="text-danger" role="alert"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add Card</button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>
+
+
 </template>
